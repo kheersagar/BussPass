@@ -23,7 +23,7 @@ export default function HomeStack() {
             headerRight: ()=> <Header/>
         }}/>
         <Stack.Screen name="studentDetail" component={StudentDetail} options={{
-            title: 'studentDetail', //Set Header Title
+            title: 'StudentDetail', //Set Header Title
             headerRight: ()=> <Header/>
         }}/>
     </Stack.Navigator>

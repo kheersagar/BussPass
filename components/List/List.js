@@ -8,10 +8,11 @@ import styles from "./style";
 
 
 
-function listClickHandler(value,navigation){
+function listClickHandler(value,image,navigation){
   
   navigation.navigate('studentDetail',{
-    name: value
+    name: value,
+    image:image
   });
 
 
@@ -19,7 +20,7 @@ function listClickHandler(value,navigation){
 
 function Mylist({value,image,navigation}){
   return(
-    <TouchableOpacity onPress={()=>listClickHandler(value,navigation)}>
+    <TouchableOpacity onPress={()=>listClickHandler(value,image,navigation)}>
     <LinearGradient
    colors={['#fbc443','#f8e785', ]}
    start={{x:0,y:0.28}}
