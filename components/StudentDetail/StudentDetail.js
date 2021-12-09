@@ -50,7 +50,7 @@ export default function StudentDetail({ route }) {
   {
     id:5,
     title:'Pickup Point',
-     value:'August 10-Jan 2022',
+     value:'Raigarh',
   }
 ]
   return (
