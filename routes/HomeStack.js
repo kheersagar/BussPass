@@ -8,6 +8,7 @@ import HomeScreen from "../components/HomeScreen/HomeScreen";
 import Header from "../components/Header/Header";
 import StudentDetail from "../components/StudentDetail/StudentDetail";
 import LogoTitle from "../components/LogoTitle/LogoTitle";
+import Login from "../components/Login/Login";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,13 @@ export default function HomeStack() {
         options={{
           title: "StudentDetail", //Set Header Title
           headerRight: () => <Header />,
+        }}
+      />
+      <Stack.Screen
+        name="login"
+        component={Login}
+        options={{
+          headerShown:false
         }}
       />
     </Stack.Navigator>

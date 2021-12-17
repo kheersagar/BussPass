@@ -5,11 +5,11 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import style from "./HomeScreenStyle";
 
-function Card({value,icon,navigation}) {
+function Card({value,icon,navigation,navigationPath}) {
 
   return (
     <TouchableOpacity onPress={()=>{
-      navigation.navigate('List');
+      navigation.navigate(navigationPath);
     }}>
     <View style={style.Card_main_container}>
       <LinearGradient
@@ -53,7 +53,7 @@ export default function HomeScreen() {
       id: 4,
       title: "Setting",
       icon: require('../../Image/Icons/setting.png'),
-      navigationPath:'Setting'
+      navigationPath:'login'
     },
   ];
 
