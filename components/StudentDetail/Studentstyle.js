@@ -1,17 +1,16 @@
-import { StyleSheet } from 'react-native'
-import { color } from 'react-native-reanimated';
+import { ScaledSheet } from 'react-native-size-matters';
 
-const style = StyleSheet.create({
+const style = ScaledSheet.create({
   StudentDetail_main_container:{
     flex:1,
     justifyContent:'center',
     alignItems:'center',
-    marginTop:10,
-    marginBottom:10,
-    marginHorizontal:20,
+    marginTop:'10@s',
+    marginBottom:'10@s',
+    marginHorizontal:'20@s',
   },
   first_section:{
-    flex:2,
+    flex:1.8,
     alignContent:'center',
     alignItems:'center',
     width:'100%',
@@ -20,22 +19,22 @@ const style = StyleSheet.create({
   first_section_name:{
     flex:1,
     alignItems:'center',
-    marginTop:20
+    marginTop:'20@s'
   },
   text:{
     fontWeight:'bold',
-    fontSize:18,
-    marginTop:10,
+    fontSize:'18@s',
+    marginTop:'10@s',
   },
   profile_image:{
     width: '100%', 
     height: '100%' ,
-    borderRadius:10,
-    borderBottomLeftRadius:30,
-    borderBottomRightRadius:30
+    borderRadius:'10@s',
+    borderBottomLeftRadius:'30@s',
+    borderBottomRightRadius:'30@s'
   },
   borderLine:{
-    height:0,
+    height:'0@s',
     width:'90%',
     borderColor:'gray',
     borderWidth:1,
@@ -46,8 +45,8 @@ const style = StyleSheet.create({
     flexDirection:'row',
     alignItems:'flex-start',
     width:'100%',
-    paddingHorizontal:20,
-    marginTop:10,
+    paddingHorizontal:'20@s',
+    marginTop:'10@s',
   },
   third_section:{
     flex:0.5,
@@ -56,12 +55,12 @@ const style = StyleSheet.create({
     width:'100%',
   },
   decline:{
-    width:160,
-    height:45,
+    width:'140@s',
+    height:'45@s',
     justifyContent:'center',
     alignItems:'center',
     backgroundColor: '#E50202',
-    borderRadius:25,
+    borderRadius:'25@s',
   },
   button_class:{
     flex:1,
@@ -70,31 +69,31 @@ const style = StyleSheet.create({
   },
   profile_button:{
     alignItems:'center',
-    fontSize:20,
+    fontSize:'20@s',
     fontWeight:'bold',
     color:'white'
   },
   approve:{
-    width:160,
-    height:45,
+    width:'140@s',
+    height:'45@s',
     justifyContent:'center',
     alignItems:'center',
-    borderRadius:25,
+    borderRadius:'25@s',
     backgroundColor:'#54E346'
   },
   Detail_row_title:{
-    fontSize:18,
-    marginTop:10,
+    fontSize:'18@s',
+    marginTop:'10@s',
   },
   Detail_row_value:{
-    fontSize:15,
+    fontSize:'15@s',
     fontWeight:'bold'
   },
   Detail_row:{
    flex:1,
    flexDirection:'row',
-   borderBottomWidth:1,
-   paddingBottom:5,
+   borderBottomWidth:'1@s',
+   paddingBottom:'5@s',
    borderColor:'gray',
   },
 });

@@ -1,6 +1,6 @@
-import {Dimensions, StyleSheet} from "react-native";
+import { ScaledSheet } from 'react-native-size-matters';
 
-const style = StyleSheet.create({
+const style = ScaledSheet.create({
   HomeScreen:{
     flex:1,
     // marginHorizontal:10
@@ -9,58 +9,57 @@ const style = StyleSheet.create({
     flex:1,
     alignItems:'flex-start',
     justifyContent:'center',
-    padding:20,
+    padding:'20@s',
     width:'100%',
     height:'100%',
-    borderBottomLeftRadius:40,
-    borderBottomRightRadius:40,
+    borderBottomLeftRadius:'40@s',
+    borderBottomRightRadius:'40@s',
   },
   Home_first_section:{
     // flex:1,
-    height:250,
-    maxHeight:300,
-    borderBottomRightRadius:30,
-    borderBottomLeftRadius:30,
+    height:'250@s',
+    maxHeight:'300@s',
+    borderBottomRightRadius:'30@s',
+    borderBottomLeftRadius:'30@s',
   },
   Home_second_section:{
-    // flex:2.5,
-    // backgroundColor:"gray"
-    position:'absolute',
-    top:200
+    flex:1,
 
   },
   Card_row:{
     flex:1,
     flexDirection:'row',
-    flexWrap:'wrap'
+    flexWrap:'wrap',
+    position:'absolute',
+    bottom:'10@s'
   },
   home_title:{
-    fontSize:24,
+    fontSize:'24@s',
     fontWeight:'bold',
     fontStyle:'normal',
-    lineHeight:25
+    lineHeight:'25@s'
   },
   Card_main_container:{
-    width:150,
-    height:200,
-    marginHorizontal:20,
-    marginVertical:15,
+    width:'130@s',
+    height:'180@s',
+    marginHorizontal:'20@s',
+    marginVertical:'15@s',
     alignItems:'center',
     justifyContent:'center',
   },
   Card_background:{
     width:'100%',
     height:'100%',
-    borderRadius:10,
+    borderRadius:'10@s',
     alignItems:'center',
     justifyContent:'center'
   },
   Card_title:{
     color:'#F0FFF3',
-    fontSize:16,
+    fontSize:'16@s',
     fontWeight:'bold',
-    lineHeight:25,
-    marginTop:10,
+    lineHeight:'25@s',
+    marginTop:'10@s',
   }
 })
 
