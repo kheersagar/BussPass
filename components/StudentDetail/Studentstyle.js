@@ -10,7 +10,7 @@ const style = ScaledSheet.create({
     marginHorizontal:'20@s',
   },
   first_section:{
-    flex:1.8,
+    flex:1.3,
     alignContent:'center',
     alignItems:'center',
     width:'100%',

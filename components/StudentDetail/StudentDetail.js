@@ -18,7 +18,7 @@ function Detail({value,title}){
         <Text style={style.Detail_row_title}>{title} </Text>
       </View>
     </View>
-    <View style={{flex:1}}>
+    <View style={{flex:1,justifyContent:'center'}}>
       <View >
         <Text style={style.Detail_row_value}>{value} </Text>
       </View>
@@ -85,6 +85,7 @@ export default function StudentDetail({ route }) {
             data={data}
             keyExtractor={data.id}
             renderItem={({item}) => <Detail title={item.title} value={item.value} />}
+            showsVerticalScrollIndicator={false}
           />
         </View>
         <View style={style.third_section}>
