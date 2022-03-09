@@ -3,10 +3,9 @@ import React, { useContext } from "react";
 import { Image, SafeAreaView, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from 'expo-linear-gradient';
-import { MyContext } from "../../App";
 import styles from "./style";
 
-
+import {useSelector,useDispatch} from  'react-redux';
 
 function listClickHandler(value,image,navigation){
   
@@ -56,7 +55,7 @@ function Mylist({value,image,navigation}){
 }
 export default function List() {
   const navigation = useNavigation();
-  const {DATA} = useContext(MyContext);
+  const DATA = useSelector((state) => state.DATA);
   return (
     <FlatList
       data={DATA}

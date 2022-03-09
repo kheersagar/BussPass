@@ -4,6 +4,7 @@ import { View, Text, Image } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import style from "./HomeScreenStyle";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function Card({value,icon,navigation,navigationPath}) {
 
@@ -58,17 +59,15 @@ export default function HomeScreen() {
   ];
 
   return (
-    <View style={style.HomeScreen}>
+    <>
       <View style={style.Home_first_section}>
         <LinearGradient
           colors={["#FFB423", "#FDDB3A"]}
           start={{ x: 0.3, y: 0.38 }}
           style={style.HomeScreen_heading}
         >
-          <View>
-            <Text style={style.home_title}>Welcom To</Text>
-            <Text style={style.home_title}>ShowBussPassFirst</Text>
-          </View>
+            <Text style={style.home_title}>Welcome To</Text>
+            <Text style={style.home_title}>BusPassFirst</Text>
         </LinearGradient>
       </View>
       <View style={style.Home_second_section}>
@@ -78,6 +77,6 @@ export default function HomeScreen() {
           })}
         </View>
       </View>
-    </View>
+      </>
   );
 }
