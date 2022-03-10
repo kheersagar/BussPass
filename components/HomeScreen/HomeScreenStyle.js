@@ -1,28 +1,24 @@
 import { ScaledSheet } from 'react-native-size-matters';
 
 const style = ScaledSheet.create({
-  HomeScreen:{
-    // flex:1,
-    // marginHorizontal:10
-  },
   HomeScreen_heading:{
-    // flex:1,
+    flex:1,
     alignItems:'flex-start',
     justifyContent:'center',
-    padding:'20@s',
+    paddingLeft:'20@s',
     width:'100%',
     height:'100%',
     borderBottomLeftRadius:'40@s',
     borderBottomRightRadius:'40@s',
   },
   Home_first_section:{
-    height:'220@s',
+    flex:1,
     maxHeight:'300@s',
     borderBottomRightRadius:'30@s',
     borderBottomLeftRadius:'30@s',
   },
   Home_second_section:{
-    // flex:1,
+    flex:1,
     position:'relative',
   },
   Card_row:{
@@ -32,7 +28,7 @@ const style = ScaledSheet.create({
     top:'-50@s'
   },
   home_title:{
-    fontSize:'24@s',
+    fontSize:'22@s',
     fontWeight:'bold',
     fontStyle:'normal',
     lineHeight:'25@s'

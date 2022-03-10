@@ -2,24 +2,16 @@ import { ScaledSheet } from 'react-native-size-matters';
 
 const style = ScaledSheet.create({
   StudentDetail_main_container:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center',
     marginTop:'10@s',
     marginBottom:'10@s',
     marginHorizontal:'20@s',
   },
   first_section:{
-    flex:1.3,
+    flex:1,
     alignContent:'center',
     alignItems:'center',
     width:'100%',
-    // backgroundColor:'yellow'
-  },
-  first_section_name:{
-    flex:1,
-    alignItems:'center',
-    marginTop:'20@s'
+    marginBottom:'10@s'
   },
   text:{
     fontWeight:'bold',
@@ -28,20 +20,12 @@ const style = ScaledSheet.create({
   },
   profile_image:{
     width: '100%', 
-    height: '100%' ,
+    height: '90%' ,
     borderRadius:'10@s',
     borderBottomLeftRadius:'30@s',
     borderBottomRightRadius:'30@s'
   },
-  borderLine:{
-    height:'0@s',
-    width:'90%',
-    borderColor:'gray',
-    borderWidth:1,
-    borderStyle:'solid',
-  },
   second_section:{
-    flex:1,
     flexDirection:'row',
     alignItems:'flex-start',
     width:'100%',
@@ -49,10 +33,11 @@ const style = ScaledSheet.create({
     marginTop:'10@s',
   },
   third_section:{
-    flex:0.5,
     flexDirection:'row',
     alignItems:'center',
+    justifyContent:'space-between',
     width:'100%',
+    paddingHorizontal:'10@s'
   },
   decline:{
     width:'140@s',
@@ -61,11 +46,6 @@ const style = ScaledSheet.create({
     alignItems:'center',
     backgroundColor: '#E50202',
     borderRadius:'25@s',
-  },
-  button_class:{
-    flex:1,
-    borderColor:'gray',
-    alignItems:'center'
   },
   profile_button:{
     alignItems:'center',
@@ -92,10 +72,18 @@ const style = ScaledSheet.create({
   Detail_row:{
    flex:1,
    flexDirection:'row',
-   borderBottomWidth:'1@s',
+   borderTopWidth:'1@s',
    paddingBottom:'5@s',
    borderColor:'gray',
   },
+  receipt_image_section:{
+    paddingHorizontal:'10@s',
+  },
+  receipt_image:{
+    width:'100%',
+    height:200,
+    borderRadius:10
+  }
 });
 
 export default style;

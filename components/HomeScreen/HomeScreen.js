@@ -66,7 +66,7 @@ export default function HomeScreen() {
           start={{ x: 0.3, y: 0.38 }}
           style={style.HomeScreen_heading}
         >
-            <Text style={style.home_title}>Welcome To</Text>
+            <Text style={[style.home_title,{fontSize:30}]}>Welcome To</Text>
             <Text style={style.home_title}>BusPassFirst</Text>
         </LinearGradient>
       </View>

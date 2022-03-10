@@ -1,8 +1,10 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { View, Text, Image, ImageBackground, Alert } from "react-native";
+import { View, Text, Image, ImageBackground, Alert,ScrollView } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { useSelector } from "react-redux";
 import style from "./Studentstyle";
+
 
 function onClickHandler(message) {
   Alert.alert("Are you sure ?", message, [
@@ -27,6 +29,8 @@ function Detail({value,title}){
   )
 }
 export default function StudentDetail({ route }) {
+
+  const {image,name} = useSelector((state) => state.studentDetail)
  var  data = [{
     id:1,
     title:'Branch',
@@ -58,53 +62,49 @@ export default function StudentDetail({ route }) {
       <LinearGradient
         colors={["#FFB423", "#FDDB3A"]}
         start={{ x: 0, y: 0.38 }}
-        style={{ width: "100%", height: "100%", borderRadius: 10 }}
+        style={{ width: "100%", height: "100%",overflow:'scroll', borderRadius: 10 }}
       >
         <View style={style.first_section}>
-          <View
-            style={{ flex: 6, flexDirection: "row", justifyContent: "center" }}
-          >
             <Image
               source={{
-                uri: route.params.image,
+                uri: image,
               }}
               style={style.profile_image}
               resizeMode="cover"
             />
-          </View>
-          <View
-            style={style.first_section_name}
-            style={{ flex: 1, justifyContent: "center" }}
-          >
-            <Text style={style.text}>{route.params.name}</Text>
-          </View>
-          <View style={style.borderLine}></View>
+          {/* name */}
+          <Text style={style.text}>{name}</Text>
         </View>
         <View style={style.second_section} >
-        <FlatList
-            data={data}
-            keyExtractor={data.id}
-            renderItem={({item}) => <Detail title={item.title} value={item.value} />}
-            showsVerticalScrollIndicator={false}
-          />
+          <FlatList
+              data={data}
+              keyExtractor={data.id}
+              renderItem={({item}) => <Detail title={item.title} value={item.value} />}
+              showsVerticalScrollIndicator={false}
+            />
+        </View>
+        <View style={style.receipt_image_section}>
+            <Image
+              source={{
+                uri: 'https://templates.invoicehome.com/cash-receipt-template-us-classic-white-receipt-750px.png',
+              }}
+              style={style.receipt_image}
+              resizeMode="contain"
+            />
         </View>
         <View style={style.third_section}>
-          <View style={style.button_class}>
             <TouchableOpacity
               style={style.decline}
               onPress={() => onClickHandler("Decline")}
             >
               <Text style={style.profile_button}>Decline</Text>
             </TouchableOpacity>
-          </View>
-          <View style={style.button_class}>
             <TouchableOpacity
               style={style.approve}
               onPress={() => onClickHandler("Approve")}
             >
               <Text style={style.profile_button}>Approve</Text>
             </TouchableOpacity>
-          </View>
         </View>
       </LinearGradient>
     </View>

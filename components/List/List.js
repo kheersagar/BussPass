@@ -4,22 +4,32 @@ import { Image, SafeAreaView, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from 'expo-linear-gradient';
 import styles from "./style";
+import { connect, useSelector } from "react-redux";
+import { studentDetail } from "../../actions";
 
-import {useSelector,useDispatch} from  'react-redux';
-
-function listClickHandler(value,image,navigation){
+// function listClickHandler(value,image,navigation){
   
-  navigation.navigate('studentDetail',{
-    name: value,
-    image:image
-  });
+//   navigation.navigate('studentDetail',{
+//     name: value,
+//     image:image
+//   });
+// }
 
-
+const mapStateToProps = (state) =>{
+  return{}
 }
 
-function Mylist({value,image,navigation}){
+const mapDispatchToProps = (dispatch)=>{
+  return{
+    listClickHandler : (value,image,navigation) => {
+      dispatch(studentDetail(value,image,navigation));
+      navigation.navigate('studentDetail');
+    }
+  }
+}
+function Mylist({props,value,image,navigation}){
   return(
-    <TouchableOpacity onPress={()=>listClickHandler(value,image,navigation)}>
+    <TouchableOpacity onPress={()=>props.listClickHandler(value,image,navigation)}>
     <LinearGradient
    colors={['#fbc443','#f8e785', ]}
    start={{x:0,y:0.28}}
@@ -53,14 +63,17 @@ function Mylist({value,image,navigation}){
 
   )
 }
-export default function List() {
+ function List(props) {
   const navigation = useNavigation();
   const DATA = useSelector((state) => state.DATA);
+
   return (
     <FlatList
       data={DATA}
       keyExtractor={DATA.id}
-      renderItem={({item}) => <Mylist value={item.title} image={item.image} navigation={navigation}/>}
+      renderItem={({item}) => <Mylist props={props} value={item.title} image={item.image} navigation={navigation}/>}
     />
   );
 }
+
+export default connect(mapStateToProps,mapDispatchToProps)(List)
