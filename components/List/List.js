@@ -7,14 +7,6 @@ import styles from "./style";
 import { connect, useSelector } from "react-redux";
 import { studentDetail } from "../../actions";
 
-// function listClickHandler(value,image,navigation){
-  
-//   navigation.navigate('studentDetail',{
-//     name: value,
-//     image:image
-//   });
-// }
-
 const mapStateToProps = (state) =>{
   return{}
 }

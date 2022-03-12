@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, StyleSheet,Text, View } from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import List from './components/List/List';
-import StudentList from './routes/HomeStack';
-import HomeStack from './routes/HomeStack';
+
+
 import store from './store';
  
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
+import MainStack from './stacks/MainStack';
+
 
 
 export default function App() {
-  const Drawer = createDrawerNavigator(); 
 
   const DATA = [
     {
@@ -76,18 +75,11 @@ export default function App() {
       image:'https://media-exp1.licdn.com/dms/image/C4E03AQGbGWI5Nk6AnQ/profile-displayphoto-shrink_400_400/0/1624343531061?e=1652313600&v=beta&t=3jfAG-rxPGA1YcZKiMfyTTVdjnaxiYcUAbbdjUnqg9s',
     },
   ];
+
   return (
     <Provider store={store}>
     <NavigationContainer>
-    <Drawer.Navigator 
-      screenOptions={{
-        headerShown:false,
-        drawerPosition:'right',
-      }}
-    >
-      <Drawer.Screen name="Home" component={HomeStack} />
-      <Drawer.Screen name="Profile" component={List} />
-    </Drawer.Navigator>
+      <MainStack />
     </NavigationContainer>
     </Provider>
   );
