@@ -1,7 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import List from "../components/List/List";
 import HomeScreen from "../components/HomeScreen/HomeScreen";
@@ -37,9 +35,18 @@ export default function HomeStack() {
           headerRight: () => <Header />,
         }}
       />
+      
       <Stack.Screen
         name="studentDetail"
         component={StudentDetail}
+        options={{
+          title: "StudentDetail", //Set Header Title
+          headerRight: () => <Header />,
+        }}
+      />
+      <Stack.Screen
+        name="AllStudent"
+        component={List}
         options={{
           title: "StudentDetail", //Set Header Title
           headerRight: () => <Header />,

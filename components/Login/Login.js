@@ -7,10 +7,48 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
+import { connect, useSelector } from "react-redux";
+import { Enrollment, Password, SubmitForm } from "../../actions";
 
 import style from "./Loginstyle";
 
-export default function Login() {
+// function EnrollmentHandler(event){
+//   // console.log(event)
+  
+// }
+
+// function passwordHandler(event){
+//   console.log(event)
+
+// }
+// function submitHandler(){
+
+// }
+
+const mapStateToProps = (state)=>{
+  // console.log(state)
+  return{
+
+  }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+  return{
+    EnrollmentHandler : (e)=>{
+      dispatch(Enrollment(e));
+
+    },
+    passwordHandler : (e)=>{
+      dispatch(Password(e))
+    },
+    onSubmit : ()=>{
+      dispatch(SubmitForm());
+    },
+  }
+}
+// main function starts
+function Login(props) {
+
   return (
     <View style={{flex:1}}>
       <ImageBackground
@@ -24,9 +62,10 @@ export default function Login() {
           style={{ width: 100, height: 100 }}
           resizeMode="contain"
         />
-        <TextInput placeholder="Enrollment No." style={style.input} />
-        <TextInput placeholder="Password" style={style.input} />
-        <TouchableOpacity style={style.login_btn}>
+        <TextInput placeholder="Enrollment No." style={style.input} onChangeText={(e)=>props.EnrollmentHandler(e)}/>
+        <TextInput placeholder="Password" style={style.input} onChangeText={(e)=>props.passwordHandler(e)} secureTextEntry/>
+        <TouchableOpacity style={style.login_btn} onPress={props.onSubmit
+        }>
           <Text style={style.btn_text}>Login</Text>
         </TouchableOpacity>
       </View>
@@ -41,3 +80,5 @@ export default function Login() {
     </View>
   );
 }
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login)

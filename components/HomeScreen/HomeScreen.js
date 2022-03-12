@@ -42,7 +42,7 @@ export default function HomeScreen() {
       id: 2,
       title: "Student-List",
       icon: require('../../Image/Icons/list.png'),
-      navigationPath:'StudentList'
+      navigationPath:'AllStudent'
     },
     {
       id: 3,
@@ -54,7 +54,7 @@ export default function HomeScreen() {
       id: 4,
       title: "Setting",
       icon: require('../../Image/Icons/setting.png'),
-      navigationPath:'login'
+      navigationPath:'setting'
     },
   ];
 
