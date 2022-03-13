@@ -7,6 +7,7 @@ import List from '../components/List/List'
 import Login from '../components/Login/Login'
 import { useSelector } from 'react-redux'
 import Logout from '../components/Logout/Logout';
+import Profile from '../components/Profile/Profile';
 
 
 export default function MainStack() {
@@ -25,7 +26,7 @@ export default function MainStack() {
   <>
   {/* If user is logged in can accessed home stack */}
     <Drawer.Screen name="Home" component={HomeStack} />
-    <Drawer.Screen name="Profile" component={List} />    
+    <Drawer.Screen name="Profile" component={Profile} />    
     <Drawer.Screen name="Logout" component={Logout} />
     </>
     :

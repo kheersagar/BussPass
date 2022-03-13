@@ -7,6 +7,7 @@ import Header from "../components/Header/Header";
 import StudentDetail from "../components/StudentDetail/StudentDetail";
 import LogoTitle from "../components/LogoTitle/LogoTitle";
 import Login from "../components/Login/Login";
+import Profile from "../components/Profile/Profile";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,7 @@ export default function HomeStack() {
           headerStyle: {
             backgroundColor: "#FFB423",
           },
-          headerShadowVisible:false,  //to hide shadow of header
+          headerShadowVisible: false, //to hide shadow of header
           headerRight: () => <Header />,
         }}
       />
@@ -35,7 +36,7 @@ export default function HomeStack() {
           headerRight: () => <Header />,
         }}
       />
-      
+
       <Stack.Screen
         name="studentDetail"
         component={StudentDetail}
@@ -53,10 +54,18 @@ export default function HomeStack() {
         }}
       />
       <Stack.Screen
+        name="profile"
+        component={Profile}
+        options={{
+          title: "Profile", //Set Header Title
+          headerRight: () => <Header />,
+        }}
+      />
+      <Stack.Screen
         name="login"
         component={Login}
         options={{
-          headerShown:false
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

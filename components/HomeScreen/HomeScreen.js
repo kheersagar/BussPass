@@ -52,9 +52,9 @@ export default function HomeScreen() {
     },
     {
       id: 4,
-      title: "Setting",
+      title: "Profile Setting",
       icon: require('../../Image/Icons/setting.png'),
-      navigationPath:'setting'
+      navigationPath:'profile'
     },
   ];
 
