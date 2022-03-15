@@ -1,10 +1,11 @@
 import { useNavigation } from "@react-navigation/core";
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, Image } from "react-native";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList, ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import style from "./HomeScreenStyle";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { MyContext } from "../../App";
 
 function Card({value,icon,navigation,navigationPath}) {
 
@@ -31,7 +32,8 @@ function Card({value,icon,navigation,navigationPath}) {
 export default function HomeScreen() {
   const navigation = useNavigation();
 
-  const data = [
+  const {isAdmin} = useContext(MyContext);
+  const data = isAdmin ? [
     {
       id: 1,
       title: "Approval/Pending",
@@ -55,11 +57,35 @@ export default function HomeScreen() {
       title: "Profile Setting",
       icon: require('../../Image/Icons/setting.png'),
       navigationPath:'profile'
-    },
-  ];
+    }
+  ] : [{
+    id: 1,
+    title: "Apply",
+    icon: require('../../Image/Icons/search.png'),
+    navigationPath:'Status'
+  },
+  {
+    id: 2,
+    title: "Your Buss Pass",
+    icon: require('../../Image/Icons/setting.png'),
+    navigationPath:'profile'
+  },
+  {
+    id: 3,
+    title: "Status",
+    icon: require('../../Image/Icons/search.png'),
+    navigationPath:'Status'
+  },
+  {
+    id: 4,
+    title: "Profile Setting",
+    icon: require('../../Image/Icons/setting.png'),
+    navigationPath:'profile'
+  }];
 
   return (
-    <>
+    <View style={{flex:1}}>
+    <ScrollView >
       <View style={style.Home_first_section}>
         <LinearGradient
           colors={["#FFB423", "#FDDB3A"]}
@@ -71,12 +97,14 @@ export default function HomeScreen() {
         </LinearGradient>
       </View>
       <View style={style.Home_second_section}>
+      
         <View style={style.Card_row}>
           {data.map((item) => {
             return <Card  value={item.title} icon={item.icon} navigation={navigation} navigationPath={item.navigationPath}/>;
           })}
         </View>
       </View>
-      </>
+        </ScrollView>
+      </View>
   );
 }

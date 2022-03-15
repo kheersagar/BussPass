@@ -2,9 +2,10 @@ import { ScaledSheet } from 'react-native-size-matters';
 
 const style = ScaledSheet.create({
   StudentDetail_main_container:{
+    flex:1,
     marginTop:'10@s',
     marginBottom:'10@s',
-    marginHorizontal:'20@s',
+    marginHorizontal:'10@s',
   },
   first_section:{
     flex:1,
@@ -20,7 +21,7 @@ const style = ScaledSheet.create({
   },
   profile_image:{
     width: '100%', 
-    height: '90%' ,
+    height: 250 ,
     borderRadius:'10@s',
     borderBottomLeftRadius:'30@s',
     borderBottomRightRadius:'30@s'
