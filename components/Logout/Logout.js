@@ -11,15 +11,8 @@ import { MyContext } from "../../App";
 
 function Logout() {
   const navigation = useNavigation();
-  const {setLogged,removeToken} = useContext(MyContext);
+  const {dispatch} = useContext(MyContext);
 
-  // making synchronous 
-  async function logoutHandler(){
-    await new Promise((resolve,reject)=>{
-      resolve(removeToken('token'));
-    })
-    setLogged(false);
-  }
   return (
     <>
       <View style={styles.alert_container}>
@@ -29,7 +22,7 @@ function Logout() {
       </View>
       <View style={styles.btn_container}>
         <TouchableOpacity
-          onPress={() => logoutHandler() }
+          onPress={() => dispatch({type:'logoutHandler'}) }
           style={styles.alert_btn}
         >
           <Text style={styles.text_btn}>Yes</Text>

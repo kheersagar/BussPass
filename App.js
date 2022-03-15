@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useState } from "react";
-import {  StyleSheet } from "react-native";
+import {  StyleSheet} from "react-native";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import * as SecureStore from 'expo-secure-store';
@@ -88,8 +88,11 @@ export default function App() {
   const [enrollment, setEnrollment] = useState();
   const [password, setPassword] = useState();
   const [logged,setLogged] = useState(false);
-  const [currentStudentData,setCurrentStudentData] = useState({})
+  const [currentStudentData,setCurrentStudentData] = useState({});
   const [isAdmin,setIsAdmin] = useState(false);
+  const [loginToken,setLoginToken] = useState();
+  const [isLoading,setIsLoading] = useState(false);
+  const [invalidLogin,setInvalidLogin] = useState(false);
 
   async function saveToken(key, value) {
     await SecureStore.setItemAsync(key, value);
@@ -98,7 +101,7 @@ export default function App() {
   async function getValueFor(key) {
     let result = await SecureStore.getItemAsync(key);
     if (result != null) {
-      const state = {status:true};
+      const state = {status:true,token:result};
       return state;
     } else {
       const state = {status:false};
@@ -116,6 +119,7 @@ export default function App() {
   }
   async function submitHandler() {
     // console.log(enrollment,password);
+    setIsLoading(true);
     try{
       const res = await axios.get("http://192.168.129.20:8080/Auth",{
         params:{
@@ -124,22 +128,49 @@ export default function App() {
         }
       })
       console.log(res.data);
+      if(res.data.status == false){
+        setInvalidLogin(true);
+      }else{
+        setInvalidLogin(false);
+      }
       setLogged(res.data.status);
       saveToken('token',res.data.token);
       setIsAdmin(res.data._doc.role == 'student' ? false : true);
+      setIsLoading(false);
       // getValueFor('token');
     }catch(e){
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+      setInvalidLogin(true);
       console.log("error on login " + e);
     }
   }
-
-  function reducer(state, action) {
-
+  async function logoutHandler(){
+    await new Promise((resolve,reject)=>{
+      resolve(removeToken('token'));
+    })
+    setLogged(false);
   }
-  const [state, dispatch] = useReducer(0, reducer);
+
+  //Reducer
+  function reducer(state, action) {
+    switch(action.type){
+      case 'EnrollmentChangeHandler': setEnrollment(action.payload);
+      break;
+      case 'PasswordChangeHandler': setPassword(action.payload)
+      break;
+      case 'login_submit': submitHandler();
+      break;
+      case 'logoutHandler' : logoutHandler();
+      break;
+      default : return true;                     
+    }
+  }
+  const [state, dispatch] = useReducer(reducer,0);
 
   return (
-    <MyContext.Provider value={{dispatch,setEnrollment,setPassword,submitHandler,logged,DATA,setCurrentStudentData,currentStudentData,setLogged,getValueFor,removeToken,isAdmin,setIsAdmin}}>
+    <MyContext.Provider value={{dispatch,logged,DATA,setCurrentStudentData,currentStudentData,setLogged,getValueFor,removeToken,isAdmin,setIsAdmin,loginToken,setLoginToken,isLoading,invalidLogin}}>
       <NavigationContainer>
         <MainStack />
       </NavigationContainer>

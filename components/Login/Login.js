@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
+  ActivityIndicator
 } from "react-native";
 import { MyContext } from "../../App";
 
@@ -14,14 +15,7 @@ import style from "./Loginstyle";
 // main function starts
 function Login() {
   //states import
-  const { setPassword, setEnrollment ,submitHandler} = useContext(MyContext);
-
-  function EnrollmentChangeHandler(e) {
-    setEnrollment(e);
-  }
-  function PasswordChangeHandler(e) {
-    setPassword(e);
-  }
+  const {dispatch,isLoading,invalidLogin} = useContext(MyContext);
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground
@@ -38,16 +32,17 @@ function Login() {
         <TextInput
           placeholder="Enrollment No."
           style={style.input}
-          onChangeText={(e) => EnrollmentChangeHandler(e)}
+          onChangeText={(e) => dispatch({type:'EnrollmentChangeHandler',payload:e})}
         />
         <TextInput
           placeholder="Password"
           style={style.input}
           secureTextEntry
-          onChangeText={(e) => PasswordChangeHandler(e)}
+          onChangeText={(e) => dispatch({type:'PasswordChangeHandler',payload:e})}
         />
-        <TouchableOpacity style={style.login_btn} onPress={submitHandler}>
-          <Text style={style.btn_text}>Login</Text>
+        {invalidLogin ? <Text>Please Enter valid username / password</Text> : null}
+        <TouchableOpacity style={style.login_btn} onPress={()=>{dispatch({type:'login_submit'})}}>
+          {isLoading ? <ActivityIndicator color='white'/> : <Text style={style.btn_text}>Login</Text>}
         </TouchableOpacity>
       </View>
       <ImageBackground

@@ -12,13 +12,14 @@ import { MyContext } from '../App';
 export default function MainStack() {
   const Drawer = createDrawerNavigator();
 
-  const {logged,getValueFor,setLogged} = useContext(MyContext);
+  const {logged,getValueFor,setLogged,setLoginToken} = useContext(MyContext);
 
   useEffect(async ()=>{
     const token = await new Promise((resolve,reject)=>{
       resolve(getValueFor('token'));
     }) 
-    // console.log("tokensdfd" + token.status)
+    // console.log("tokensdfd " + token.token)
+    setLoginToken(token.token);
     setLogged(token.status);
   },[]);
 
