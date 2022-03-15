@@ -13,7 +13,7 @@ const style = ScaledSheet.create({
   },
   Home_first_section:{
     flex:1,
-    maxHeight:'300@s',
+    height:'300@s',
     borderBottomRightRadius:'30@s',
     borderBottomLeftRadius:'30@s',
   },
@@ -24,8 +24,7 @@ const style = ScaledSheet.create({
   Card_row:{
     flexDirection:'row',
     flexWrap:'wrap',
-    position:'absolute',
-    top:'-50@s'
+    marginTop:'-50@s'
   },
   home_title:{
     fontSize:'22@s',

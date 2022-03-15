@@ -1,19 +1,27 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import HomeStack from '../routes/HomeStack'
-import List from '../components/List/List'
 import Login from '../components/Login/Login'
-import { useSelector } from 'react-redux'
 import Logout from '../components/Logout/Logout';
 import Profile from '../components/Profile/Profile';
+import { MyContext } from '../App';
 
 
 export default function MainStack() {
-  const Drawer = createDrawerNavigator(); 
-  const {logged} = useSelector((state) => state.loginCreditials)
-  console.log(logged)
+  const Drawer = createDrawerNavigator();
+
+  const {logged,getValueFor,setLogged} = useContext(MyContext);
+
+  useEffect(async ()=>{
+    const token = await new Promise((resolve,reject)=>{
+      resolve(getValueFor('token'));
+    }) 
+    // console.log("tokensdfd" + token.status)
+    setLogged(token.status);
+  },[]);
+
   return (
     <Drawer.Navigator 
     screenOptions={{

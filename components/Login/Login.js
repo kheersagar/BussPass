@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -7,50 +7,23 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import { connect, useSelector } from "react-redux";
-import { Enrollment, Password, SubmitForm } from "../../actions";
+import { MyContext } from "../../App";
 
 import style from "./Loginstyle";
 
-// function EnrollmentHandler(event){
-//   // console.log(event)
-  
-// }
-
-// function passwordHandler(event){
-//   console.log(event)
-
-// }
-// function submitHandler(){
-
-// }
-
-const mapStateToProps = (state)=>{
-  // console.log(state)
-  return{
-
-  }
-}
-
-const mapDispatchToProps = (dispatch)=>{
-  return{
-    EnrollmentHandler : (e)=>{
-      dispatch(Enrollment(e));
-
-    },
-    passwordHandler : (e)=>{
-      dispatch(Password(e))
-    },
-    onSubmit : ()=>{
-      dispatch(SubmitForm());
-    },
-  }
-}
 // main function starts
-function Login(props) {
+function Login() {
+  //states import
+  const { setPassword, setEnrollment ,submitHandler} = useContext(MyContext);
 
+  function EnrollmentChangeHandler(e) {
+    setEnrollment(e);
+  }
+  function PasswordChangeHandler(e) {
+    setPassword(e);
+  }
   return (
-    <View style={{flex:1}}>
+    <View style={{ flex: 1 }}>
       <ImageBackground
         source={require("../../Image/loginBackground-1.png")}
         style={{ width: "100%", height: 100 }}
@@ -62,10 +35,18 @@ function Login(props) {
           style={{ width: 100, height: 100 }}
           resizeMode="contain"
         />
-        <TextInput placeholder="Enrollment No." style={style.input} onChangeText={(e)=>props.EnrollmentHandler(e)}/>
-        <TextInput placeholder="Password" style={style.input} onChangeText={(e)=>props.passwordHandler(e)} secureTextEntry/>
-        <TouchableOpacity style={style.login_btn} onPress={props.onSubmit
-        }>
+        <TextInput
+          placeholder="Enrollment No."
+          style={style.input}
+          onChangeText={(e) => EnrollmentChangeHandler(e)}
+        />
+        <TextInput
+          placeholder="Password"
+          style={style.input}
+          secureTextEntry
+          onChangeText={(e) => PasswordChangeHandler(e)}
+        />
+        <TouchableOpacity style={style.login_btn} onPress={submitHandler}>
           <Text style={style.btn_text}>Login</Text>
         </TouchableOpacity>
       </View>
@@ -81,4 +62,4 @@ function Login(props) {
   );
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Login)
+export default Login;

@@ -1,26 +1,25 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { AccountLogout } from "../../actions";
 
 //styles
 import { ScaledSheet } from "react-native-size-matters";
+import { MyContext } from "../../App";
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    NoHandler: (navigation) => {
-      navigation.navigate("Home");
-    },
-    YesHandler: () => {
-      dispatch(AccountLogout());
-    },
-  };
-};
 
-function Logout(props) {
+function Logout() {
   const navigation = useNavigation();
+  const {setLogged,removeToken} = useContext(MyContext);
+
+  // making synchronous 
+  async function logoutHandler(){
+    await new Promise((resolve,reject)=>{
+      resolve(removeToken('token'));
+    })
+    setLogged(false);
+  }
   return (
     <>
       <View style={styles.alert_container}>
@@ -30,13 +29,13 @@ function Logout(props) {
       </View>
       <View style={styles.btn_container}>
         <TouchableOpacity
-          onPress={() => props.YesHandler()}
+          onPress={() => logoutHandler() }
           style={styles.alert_btn}
         >
           <Text style={styles.text_btn}>Yes</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => props.NoHandler(navigation)}
+          onPress={() =>navigation.navigate('Home') }
           style={styles.alert_btn}
         >
           <Text style={styles.text_btn}>No</Text>
@@ -49,7 +48,7 @@ function Logout(props) {
   );
 }
 
-export default connect(null, mapDispatchToProps)(Logout);
+export default Logout;
 
 const styles = ScaledSheet.create({
   alert_container: {
