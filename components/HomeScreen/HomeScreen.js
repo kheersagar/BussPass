@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import { FlatList, ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
@@ -33,7 +33,8 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   const {isAdmin} = useContext(MyContext);
-  const data = isAdmin ? [
+
+  const data = isAdmin  ? [
     {
       id: 1,
       title: "Approval/Pending",

@@ -93,7 +93,9 @@ export default function App() {
   const [isLoading,setIsLoading] = useState(false);
   const [invalidLogin,setInvalidLogin] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [userData,setUserData] = useState(null);
   const [image, setImage] = useState(null);
+  const [profileImage,setProfileImage] = useState(null);
   
   //student data
   const [studentData,setStudentData] = useState(null);
@@ -138,11 +140,12 @@ export default function App() {
       }else{
         setInvalidLogin(false);
       }
+      setUserData(res.data._doc);
       setLogged(res.data.status);
       saveToken('token',res.data.token);
+      saveToken('role',res.data._doc.role);
       setIsAdmin(res.data._doc.role == 'student' ? false : true);
       setIsLoading(false);
-      // getValueFor('token');
     }catch(e){
       setTimeout(() => {
         setIsLoading(false);
@@ -154,6 +157,9 @@ export default function App() {
   async function logoutHandler(){
     await new Promise((resolve,reject)=>{
       resolve(removeToken('token'));
+    })
+    await new Promise((resolve,reject)=>{
+      resolve(removeToken('role'));
     })
     setLogged(false);
   }
@@ -170,6 +176,23 @@ export default function App() {
     if( res.data != null){
       setStudentData(res.data);
     }
+  }
+
+  async function updateUserData(){
+    console.log("called")
+    const formData = new FormData();
+
+    formData.append('userId', loginToken);
+    formData.append('image', {
+      uri: profileImage,
+      name: 'SomeImageName.jpg',
+      type: 'image/jpg',
+    } );
+
+    await fetch("http://192.168.129.20:8080/update-profile", {
+      method: "POST",
+      body: formData,
+    });
   }
 
   async function applyBussPass(){
@@ -211,6 +234,10 @@ export default function App() {
       break;
       case 'CURRENT_STUDENT' : setCurrentStudentData(action.payload);
       break;
+      case 'PROFILE_IMAGE' : setProfileImage(action.payload);
+      break;
+      case 'UPDATE_PROFILE' : updateUserData(action.payload);
+      break;
       case 'ModalImage' : setImage(action.payload);
       break;
       case 'ModalReceiptVisible' : setModalVisible(true);
@@ -228,7 +255,7 @@ export default function App() {
 
   return (
     <MyContext.Provider value={{dispatch,logged,studentData,currentStudentData,setLogged,getValueFor,removeToken,isAdmin,setIsAdmin,loginToken,setLoginToken,isLoading,invalidLogin,
-    modalVisible, setModalVisible,image, setImage}}>
+    modalVisible, setModalVisible,image, setImage,userData,profileImage}}>
       <NavigationContainer>
         <MainStack />
       </NavigationContainer>

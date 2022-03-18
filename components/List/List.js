@@ -59,7 +59,7 @@ function List({navigation }) {
   useEffect(()=>{
     if(currentroute == 'AllStudent'){
       dispatch({type:'FETCH_LIST'});
-    }else{
+    }else if(currentroute == 'List'){
       dispatch({type:'STUDENT_STATUS_LIST'});
     }
   },[])

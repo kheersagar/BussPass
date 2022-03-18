@@ -1,27 +1,53 @@
-import { StyleSheet, Text, View, Image } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, Image,TouchableOpacity } from "react-native";
+import React, { useContext, useEffect } from "react";
+
+import * as ImagePicker from "expo-image-picker";
 
 //
 import { ScaledSheet } from "react-native-size-matters";
-import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { MyContext } from "../../App";
 
 export default function Profile() {
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+
+    if (!result.cancelled) {
+      dispatch({type:'PROFILE_IMAGE',payload:result.uri});
+    }
+  };
+
+  const {userData,profileImage,dispatch} = useContext(MyContext);
+  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img } = userData;
+
   return (
     <View style={styles.profile_container}>
     <ScrollView >
       <View style={styles.image_section}>
-        <Image
-          source={require("../../Image/profile.jpg")}
+        {profileImage && (
+          <Image
+          source={{uri:profileImage}}
           style={styles.profile_image}
         />
-        <Image source={require("../../Image/Icons/edit_img.png")} style={{position:'absolute',bottom:-15}}/>
+        )}
+        <TouchableOpacity style={{position:'absolute',bottom:-15}} onPress={pickImage}>
+          <Image source={require("../../Image/Icons/edit_img.png")} />
+        </TouchableOpacity>
       </View>
       <View style={styles.input_field_section}>
         {/* 1 */}
         <View style={styles.text_input}>
           <View>
             <Text>Name</Text>
-            <TextInput placeholder="kheersagar" style={styles.input} />
+            <TextInput  placeholder={first_name + " " + last_name} style={styles.input} />
           </View>
           <View style={{ justifyContent: "center" }}>
             <Image
@@ -34,7 +60,7 @@ export default function Profile() {
         <View style={styles.text_input}>
           <View>
             <Text>Branch</Text>
-            <TextInput placeholder="Btech(cse)" style={styles.input} />
+            <TextInput  placeholder={branch} style={styles.input} />
           </View>
           <View style={{ justifyContent: "center" }}>
             <Image
@@ -47,7 +73,7 @@ export default function Profile() {
         <View style={styles.text_input}>
           <View>
             <Text>Semester</Text>
-            <TextInput placeholder="6th" style={styles.input} />
+            <TextInput  placeholder={semester.toString() + "th"} keyboardType='number-pad' style={styles.input} />
           </View>
           <View style={{ justifyContent: "center" }}>
             <Image
@@ -60,7 +86,7 @@ export default function Profile() {
         <View style={styles.text_input}>
           <View>
             <Text>Phone No</Text>
-            <TextInput placeholder="87981263921" style={styles.input} />
+            <TextInput  placeholder={phone_no.toString()} keyboardType='number-pad' style={styles.input} />
           </View>
           <View style={{ justifyContent: "center" }}>
             <Image
@@ -73,7 +99,7 @@ export default function Profile() {
         <View style={styles.text_input}>
           <View>
             <Text>Address</Text>
-            <TextInput placeholder="asds" style={styles.input} />
+            <TextInput  placeholder={address} style={styles.input} />
           </View>
           <View style={{ justifyContent: "center" }}>
             <Image
@@ -86,7 +112,7 @@ export default function Profile() {
         <View style={styles.text_input}>
           <View>
             <Text>Email Id</Text>
-            <TextInput placeholder="ex@gamil.com" style={styles.input} />
+            <TextInput  placeholder={email}  style={styles.input} />
           </View>
           <View style={{ justifyContent: "center" }}>
             <Image
@@ -97,7 +123,7 @@ export default function Profile() {
         </View>
       </View>
       <View style={styles.btn_section}>
-        <TouchableOpacity style={styles.save_btn}>
+        <TouchableOpacity style={styles.save_btn} onPress={()=>{dispatch({type:'UPDATE_PROFILE',payload:profileImage})}}>
             <Text style={styles.btn_text}>Save</Text>
         </TouchableOpacity>
       </View>
@@ -119,7 +145,8 @@ const styles = ScaledSheet.create({
     position:'relative'
   },
   profile_image: {
-    maxWidth: "200@s",
+    width:'250@s',
+    maxWidth: "300@s",
     height: "180@s",
     resizeMode: "cover",
     borderRadius: 20,
