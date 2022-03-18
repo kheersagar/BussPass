@@ -13,12 +13,20 @@ import { MyContext } from "../../App";
 import style from "./Studentstyle";
 
 import axios from "axios";
+import ModalReceipt from "../ModalReceipt/ModalReceipt";
 
-function onClickHandler(message) {
-  Alert.alert("Are you sure ?", message, [
-    { text: "Yes", onPress: () => console.log("Yes Pressed") },
-    { text: "No", onPress: () => console.log("No Pressed") },
-  ]);
+function onClickHandler(message,dispatch,_id) {
+  if(message === 'Approve'){    
+    Alert.alert("Are you sure ?", message, [
+      { text: "Yes", onPress: () => dispatch({type:'BUSS_PASS_APPROVED',payload:2,_id:_id})},
+      { text: "No", onPress: () => console.log() },
+    ]);
+  }else{
+    Alert.alert("Are you sure ?", message, [
+      { text: "Yes", onPress: () => dispatch({type:'BUSS_PASS_APPROVED',payload:3,_id:_id})},
+      { text: "No", onPress: () => console.log() },
+    ]);
+  }
 }
 function Detail({ value, title }) {
   return (
@@ -37,57 +45,46 @@ function Detail({ value, title }) {
   );
 }
 export default function StudentDetail({ route }) {
+
+
+  const { currentStudentData,dispatch } = useContext(MyContext);
+
+  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img } = currentStudentData;
+  
   var data = [
     {
       id: 1,
       title: "Branch",
-      value: "B.Tech(Cse)",
+      value: branch,
     },
     {
       id: 2,
       title: "Semester",
-      value: "5th",
+      value: `${semester}th`,
     },
     {
       id: 3,
       title: "Enrollment No.",
-      value: "01ug19020068",
+      value: username,
     },
     {
       id: 4,
       title: "Bus No.",
-      value: "7",
+      value: bus_no,
     },
     {
       id: 5,
       title: "Pickup Point",
-      value: "Raigarh",
+      value: pickup_point,
     },
   ];
-  const { currentStudentData } = useContext(MyContext);
-  const { name, image } = currentStudentData;
-  
-  // useEffect(async ()=>{
-  //   const newUser = {username: 'kheer',
-  //   salt: '10',
-  //   password: '12345',
-  //   role: 'student',
-  //   email: 'sad@sasd.com',
-  //   branch:'CSE',
-  //   semester: 6,
-  //   phone_no: 2311312,
-  //   address: 'asdasd',
-  //   bus_bo: 7}
-  //   try{
-  //     const res = await axios.post("http://192.168.129.20:8080/sign-in",newUser);
-  //     console.log(res);
-  //   }catch(e){
-  //     console.log(e);
-  //   }
-  // },[])
-  
+  useEffect(()=>{
+    dispatch({type:'ModalImage',payload:`http://192.168.129.20:8080/${receipt_img}`});
+  },[])
+  console.log(_id);
   return (
     <View style={style.StudentDetail_main_container}>
+      <ModalReceipt />
       <ScrollView>
         <LinearGradient
           colors={["#FFB423", "#FDDB3A"]}
@@ -98,15 +95,15 @@ export default function StudentDetail({ route }) {
           }}
         >
           <View style={style.first_section}>
-            <Image
+            {/* <Image
               source={{
                 uri: image,
               }}
               style={style.profile_image}
               resizeMode="cover"
-            />
+            /> */}
             {/* name */}
-            <Text style={style.text}>{name}</Text>
+            <Text style={style.text}>{first_name}</Text>
           </View>
           <View style={style.second_section}>
             <FlatList
@@ -119,24 +116,30 @@ export default function StudentDetail({ route }) {
             />
           </View>
           <View style={style.receipt_image_section}>
+          <TouchableOpacity onPress={()=>{
+              dispatch({type:'ModalReceiptVisible'})
+            }}>  
+            {receipt_img ?
             <Image
               source={{
-                uri: "https://templates.invoicehome.com/cash-receipt-template-us-classic-white-receipt-750px.png",
+                uri: `http://192.168.129.20:8080/${receipt_img}`,
               }}
               style={style.receipt_image}
               resizeMode="contain"
             />
+            : <Text>No receipt Found</Text>}
+            </TouchableOpacity>
           </View>
           <View style={style.third_section}>
             <TouchableOpacity
               style={style.decline}
-              onPress={() => onClickHandler("Decline")}
+              onPress={() => onClickHandler("Decline",dispatch,_id)}
             >
               <Text style={style.profile_button}>Decline</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={style.approve}
-              onPress={() => onClickHandler("Approve")}
+              onPress={() => onClickHandler("Approve",dispatch,_id)}
             >
               <Text style={style.profile_button}>Approve</Text>
             </TouchableOpacity>

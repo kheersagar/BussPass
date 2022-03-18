@@ -62,7 +62,7 @@ export default function HomeScreen() {
     id: 1,
     title: "Apply",
     icon: require('../../Image/Icons/search.png'),
-    navigationPath:'Status'
+    navigationPath:'apply-buss-pass'
   },
   {
     id: 2,

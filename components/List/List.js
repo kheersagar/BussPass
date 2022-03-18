@@ -1,26 +1,21 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useContext } from "react";
-import { Image, SafeAreaView, Text, View } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { Image, SafeAreaView, Text, View,ActivityIndicator } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./style";
 import { MyContext } from "../../App";
 
-const listClickHandler = (value, image, navigation,setCurrentStudentData) => {
-  const studentData = {
-    name: value,
-    image: image,
-    navigation: navigation,
-  };
-  setCurrentStudentData(studentData);
-  navigation.navigate("studentDetail");
-};
 
-function Mylist({ value, image, navigation,setCurrentStudentData }) {
+function Mylist({currenStudent, navigation,dispatch }) {
+
+  const {first_name} = currenStudent;
   return (
     <TouchableOpacity
-      onPress={() =>
-        listClickHandler(value, image, navigation,setCurrentStudentData)
+      onPress={() =>{
+        dispatch({type:'CURRENT_STUDENT',payload:currenStudent})
+        navigation.navigate("studentDetail");
+      }
       }
     >
       <LinearGradient
@@ -29,16 +24,16 @@ function Mylist({ value, image, navigation,setCurrentStudentData }) {
         style={styles.main_container}
       >
         <View>
-          <Image
+          {/* <Image
             style={styles.profile_pic}
             source={{
               uri: image,
             }}
-          />
+          /> */}
         </View>
         <View style={styles.info}>
           <View>
-            <Text style={styles.student_name}>{value}</Text>
+            <Text style={styles.student_name}>{first_name}</Text>
           </View>
           <View>
             <Text style={styles.student_course}>status</Text>
@@ -55,16 +50,32 @@ function Mylist({ value, image, navigation,setCurrentStudentData }) {
     </TouchableOpacity>
   );
 }
-function List() {
-  const navigation = useNavigation();
 
-  const { DATA,setCurrentStudentData } = useContext(MyContext);
+function List({navigation }) {
+  const currentroute = navigation.getState().routes[1].key.split('-')[0];
+  console.log(currentroute);
+  const { studentData,setCurrentStudentData,dispatch } = useContext(MyContext);
+  
+  useEffect(()=>{
+    if(currentroute == 'AllStudent'){
+      dispatch({type:'FETCH_LIST'});
+    }else{
+      dispatch({type:'STUDENT_STATUS_LIST'});
+    }
+  },[])
+  
+  if(!studentData){
+    return <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator color='white'/></View>
+  }
+
+  console.log(studentData);
+
   return (
     <FlatList
-      data={DATA}
-      keyExtractor={DATA.id}
+      data={studentData}
+      keyExtractor={studentData.id}
       renderItem={({ item }) => (
-        <Mylist value={item.title} image={item.image} navigation={navigation} setCurrentStudentData={setCurrentStudentData}/>
+        <Mylist currenStudent={item} navigation={navigation} dispatch={dispatch}/>
       )}
     />
   );
