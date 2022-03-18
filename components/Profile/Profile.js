@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image,TouchableOpacity } from "react-native";
-import React, { useContext, useEffect } from "react";
+import { StyleSheet, Text, View, Image,TouchableOpacity,ActivityIndicator } from "react-native";
+import React, { useContext, useEffect, useRef } from "react";
 
 import * as ImagePicker from "expo-image-picker";
 
@@ -9,6 +9,22 @@ import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { MyContext } from "../../App";
 
 export default function Profile() {
+
+  const {userData,profileImage,dispatch} = useContext(MyContext);
+
+  if(userData == undefined){
+    return   <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator color='white'/></View>
+  }
+
+  useEffect(() => {
+      return () => {
+        //runs when component unmounts
+          dispatch({type:'CLEAR_PROFILE'})
+      };
+  }, []);
+  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img } = userData;
+  
+
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -25,18 +41,26 @@ export default function Profile() {
     }
   };
 
-  const {userData,profileImage,dispatch} = useContext(MyContext);
-  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img } = userData;
 
   return (
     <View style={styles.profile_container}>
     <ScrollView >
       <View style={styles.image_section}>
+        {userData && (
+          <Image
+          source={{uri:`http://192.168.129.20:8080/${userData.profile_img}`}}
+          style={styles.profile_image}
+        />
+        )}
+
         {profileImage && (
+          <>
+          <Text style={styles.new_image_text}> New Image</Text>
           <Image
           source={{uri:profileImage}}
           style={styles.profile_image}
         />
+        </>
         )}
         <TouchableOpacity style={{position:'absolute',bottom:-15}} onPress={pickImage}>
           <Image source={require("../../Image/Icons/edit_img.png")} />
@@ -123,7 +147,7 @@ export default function Profile() {
         </View>
       </View>
       <View style={styles.btn_section}>
-        <TouchableOpacity style={styles.save_btn} onPress={()=>{dispatch({type:'UPDATE_PROFILE',payload:profileImage})}}>
+        <TouchableOpacity style={styles.save_btn} onPress={()=>{dispatch({type:'UPDATE_PROFILE',payload:profileImage}); dispatch({type:'CLEAR_PROFILE'})}}>
             <Text style={styles.btn_text}>Save</Text>
         </TouchableOpacity>
       </View>
@@ -150,6 +174,10 @@ const styles = ScaledSheet.create({
     height: "180@s",
     resizeMode: "cover",
     borderRadius: 20,
+  },
+  new_image_text:{
+    fontSize:22,
+    fontWeight:'600',
   },
   input_field_section: {
     flex: 2,

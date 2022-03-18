@@ -24,12 +24,10 @@ function Mylist({currenStudent, navigation,dispatch }) {
         style={styles.main_container}
       >
         <View>
-          {/* <Image
+          <Image
             style={styles.profile_pic}
-            source={{
-              uri: image,
-            }}
-          /> */}
+            source={{uri:`http://192.168.129.20:8080/${currenStudent.profile_img}`}}
+          />
         </View>
         <View style={styles.info}>
           <View>
@@ -73,9 +71,9 @@ function List({navigation }) {
   return (
     <FlatList
       data={studentData}
-      keyExtractor={studentData.id}
+      keyExtractor={studentData._id}
       renderItem={({ item }) => (
-        <Mylist currenStudent={item} navigation={navigation} dispatch={dispatch}/>
+        <Mylist currenStudent={item} navigation={navigation} dispatch={dispatch} />
       )}
     />
   );

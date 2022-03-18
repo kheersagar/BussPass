@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import React, { useContext, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
@@ -18,34 +19,39 @@ import ModalReceipt from "../ModalReceipt/ModalReceipt";
 
 export default function ApplyBussPass() {
 
-  const {dispatch,image} = useContext(MyContext);
+  const {dispatch,image,userData} = useContext(MyContext);
 
+  if(userData == undefined){
+    return   <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator color='white'/></View>
+  }
+
+  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img } = userData;
   
   var data = [
     {
       id: 1,
       title: "Branch",
-      value: "B.Tech(Cse)",
+      value: branch,
     },
     {
       id: 2,
       title: "Semester",
-      value: "5th",
+      value: semester + "th",
     },
     {
       id: 3,
       title: "Enrollment No.",
-      value: "01ug19020068",
+      value: username,
     },
     {
       id: 4,
       title: "Bus No.",
-      value: "7",
+      value: bus_no,
     },
     {
       id: 5,
       title: "Pickup Point",
-      value: "Raigarh",
+      value: pickup_point,
     },
   ];
 
@@ -96,14 +102,12 @@ export default function ApplyBussPass() {
         >
           <View style={style.first_section}>
             <Image
-              source={{
-                uri: "https://media-exp1.licdn.com/dms/image/C5603AQEkuyp3J4Tirg/profile-displayphoto-shrink_800_800/0/1608468923158?e=1652313600&v=beta&t=uKU4zthYP5GoM4HDeYHXweIxAn45OlmTWtqth-GEAfQ",
-              }}
+              source={{uri:`http://192.168.129.20:8080/${userData.profile_img}`}}
               style={style.profile_image}
               resizeMode="cover"
             />
             {/* name */}
-            <Text style={style.text}>asds</Text>
+            <Text style={style.text}>{first_name +" "+ last_name}</Text>
           </View>
           <View style={style.second_section}>
             <FlatList

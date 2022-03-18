@@ -189,10 +189,12 @@ export default function App() {
       type: 'image/jpg',
     } );
 
-    await fetch("http://192.168.129.20:8080/update-profile", {
+    const res = await fetch("http://192.168.129.20:8080/update-profile", {
       method: "POST",
       body: formData,
     });
+    // console.log(await res.json());
+    setUserData(await res.json());
   }
 
   async function applyBussPass(){
@@ -235,6 +237,8 @@ export default function App() {
       case 'CURRENT_STUDENT' : setCurrentStudentData(action.payload);
       break;
       case 'PROFILE_IMAGE' : setProfileImage(action.payload);
+      break;
+      case 'CLEAR_PROFILE' : setProfileImage(null);
       break;
       case 'UPDATE_PROFILE' : updateUserData(action.payload);
       break;
