@@ -49,7 +49,7 @@ export default function StudentDetail({ route }) {
 
   const { currentStudentData,dispatch } = useContext(MyContext);
 
-  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img } = currentStudentData;
+  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img,profile_img } = currentStudentData;
   
   var data = [
     {
@@ -81,7 +81,7 @@ export default function StudentDetail({ route }) {
   useEffect(()=>{
     dispatch({type:'ModalImage',payload:`http://192.168.129.20:8080/${receipt_img}`});
   },[])
-  console.log(_id);
+
   return (
     <View style={style.StudentDetail_main_container}>
       <ModalReceipt />
@@ -95,13 +95,11 @@ export default function StudentDetail({ route }) {
           }}
         >
           <View style={style.first_section}>
-            {/* <Image
-              source={{
-                uri: image,
-              }}
+            <Image
+              source={{uri:`http://192.168.129.20:8080/${profile_img}`}}
               style={style.profile_image}
               resizeMode="cover"
-            /> */}
+            />
             {/* name */}
             <Text style={style.text}>{first_name}</Text>
           </View>

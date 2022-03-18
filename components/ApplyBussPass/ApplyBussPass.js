@@ -19,7 +19,7 @@ import ModalReceipt from "../ModalReceipt/ModalReceipt";
 
 export default function ApplyBussPass() {
 
-  const {dispatch,image,userData} = useContext(MyContext);
+  const {dispatch,image,userData,isAppliedLoading} = useContext(MyContext);
 
   if(userData == undefined){
     return   <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator color='white'/></View>
@@ -147,7 +147,7 @@ export default function ApplyBussPass() {
                 dispatch({type:'APPLY_BUSS_PASS'})
               }}
             >
-              <Text style={style.apply_btn_text}>Apply</Text>
+             {isAppliedLoading ? <ActivityIndicator color='white'/> : <Text style={style.apply_btn_text}>Apply</Text>}
             </TouchableOpacity>
           </View>
         </LinearGradient>

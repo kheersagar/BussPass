@@ -101,6 +101,9 @@ export default function App() {
   const [studentData,setStudentData] = useState(null);
   const [currentStudentData,setCurrentStudentData] = useState(null);
 
+  //loading
+  const [isAppliedLoading,setIsAppliedLoading] = useState(false);
+
   async function saveToken(key, value) {
     await SecureStore.setItemAsync(key, value);
   }
@@ -198,6 +201,9 @@ export default function App() {
   }
 
   async function applyBussPass(){
+
+    setIsAppliedLoading(true);
+
     const formData = new FormData();
 
     formData.append('userId', loginToken);
@@ -206,11 +212,18 @@ export default function App() {
       name: 'SomeImageName.jpg',
       type: 'image/jpg',
     } );
-
-    await fetch("http://192.168.129.20:8080/apply-buss-pass", {
-      method: "POST",
-      body: formData,
-    });
+    
+    try{
+      const res =  await fetch("http://192.168.129.20:8080/apply-buss-pass", {
+         method: "POST",
+         body: formData,
+       });
+       if(await res.json()){
+         setIsAppliedLoading(false);
+       }
+    }catch(e){
+      console.log(e);
+    }
   }
 
   async function bussPassApproved(status,_id){
@@ -259,7 +272,7 @@ export default function App() {
 
   return (
     <MyContext.Provider value={{dispatch,logged,studentData,currentStudentData,setLogged,getValueFor,removeToken,isAdmin,setIsAdmin,loginToken,setLoginToken,isLoading,invalidLogin,
-    modalVisible, setModalVisible,image, setImage,userData,profileImage}}>
+    modalVisible, setModalVisible,image, setImage,userData,profileImage,isAppliedLoading}}>
       <NavigationContainer>
         <MainStack />
       </NavigationContainer>
