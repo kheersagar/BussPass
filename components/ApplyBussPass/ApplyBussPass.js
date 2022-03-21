@@ -25,7 +25,7 @@ export default function ApplyBussPass() {
     return   <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator color='white'/></View>
   }
 
-  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img } = userData;
+  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,status,semester,receipt_img } = userData;
   
   var data = [
     {
@@ -101,11 +101,18 @@ export default function ApplyBussPass() {
           }}
         >
           <View style={style.first_section}>
+          {userData.profile_img ? 
             <Image
               source={{uri:`http://192.168.129.20:8080/${userData.profile_img}`}}
               style={style.profile_image}
               resizeMode="cover"
             />
+          :
+          <Image
+          source={require("../../Image/male_profile.png")}
+          style={style.profile_image}
+        />
+        }
             {/* name */}
             <Text style={style.text}>{first_name +" "+ last_name}</Text>
           </View>
@@ -143,11 +150,12 @@ export default function ApplyBussPass() {
           <View style={style.third_section}>
             <TouchableOpacity
               style={style.apply_btn}
+              disabled={status == 1 ? true: false}
               onPress={()=>{
                 dispatch({type:'APPLY_BUSS_PASS'})
               }}
             >
-             {isAppliedLoading ? <ActivityIndicator color='white'/> : <Text style={style.apply_btn_text}>Apply</Text>}
+             {isAppliedLoading ? <ActivityIndicator color='white'/> : <Text style={style.apply_btn_text}>{status != 1 ? 'Apply' : 'Applied'}</Text>}
             </TouchableOpacity>
           </View>
         </LinearGradient>

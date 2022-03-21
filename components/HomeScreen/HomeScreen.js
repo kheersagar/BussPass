@@ -97,12 +97,15 @@ export default function HomeScreen() {
             <Text style={style.home_title}>BusPassFirst</Text>
         </LinearGradient>
       </View>
-      <View style={style.Home_second_section}>
-      
+      <View style={style.Home_second_section}>      
         <View style={style.Card_row}>
-          {data.map((item) => {
-            return <Card  value={item.title} icon={item.icon} navigation={navigation} navigationPath={item.navigationPath}/>;
-          })}
+          <FlatList 
+            data={data}
+            numColumns={2}
+            renderItem={({item})=>{
+             return <Card  value={item.title} icon={item.icon} navigation={navigation} navigationPath={item.navigationPath}/>
+            }}
+          />
         </View>
       </View>
         </ScrollView>

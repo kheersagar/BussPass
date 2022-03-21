@@ -9,7 +9,10 @@ import { MyContext } from "../../App";
 
 function Mylist({currenStudent, navigation,dispatch }) {
 
-  const {first_name} = currenStudent;
+  const {first_name,status,branch,profile_img} = currenStudent;
+
+  const statusArr = ['Not Applied','Applied','Approve','Decline','Admin'];
+
   return (
     <TouchableOpacity
       onPress={() =>{
@@ -24,24 +27,30 @@ function Mylist({currenStudent, navigation,dispatch }) {
         style={styles.main_container}
       >
         <View>
+        {profile_img ? 
           <Image
             style={styles.profile_pic}
-            source={{uri:`http://192.168.129.20:8080/${currenStudent.profile_img}`}}
+            source={{uri:`http://192.168.129.20:8080/${profile_img}`}}
           />
+          :
+          <Image
+          source={require("../../Image/male_profile.png")}
+          style={styles.profile_pic}
+        />
+        }
         </View>
         <View style={styles.info}>
           <View>
             <Text style={styles.student_name}>{first_name}</Text>
           </View>
           <View>
-            <Text style={styles.student_course}>status</Text>
+            <Text style={styles.student_course}>{branch} || {statusArr[status]}</Text>
           </View>
         </View>
         <View>
           <Image
-            style={styles.status}
+            style={[styles.status]}
             source={require("../../Image/status.png")}
-            style={{ width: 25, height: 25 }}
           />
         </View>
       </LinearGradient>
@@ -52,7 +61,7 @@ function Mylist({currenStudent, navigation,dispatch }) {
 function List({navigation }) {
   const currentroute = navigation.getState().routes[1].key.split('-')[0];
   console.log(currentroute);
-  const { studentData,setCurrentStudentData,dispatch } = useContext(MyContext);
+  const { studentData,dispatch } = useContext(MyContext);
   
   useEffect(()=>{
     if(currentroute == 'AllStudent'){

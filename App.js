@@ -109,11 +109,14 @@ export default function App() {
   }
 
   async function getValueFor(key) {
+    console.log("called get token")
     let result = await SecureStore.getItemAsync(key);
     if (result != null) {
+      // alert("🔐 Here's your value 🔐 \n" + result);
       const state = {status:true,token:result};
       return state;
     } else {
+      // alert('No values stored under that key.');
       const state = {status:false};
       return state;
     }
@@ -137,16 +140,20 @@ export default function App() {
           password:password
         }
       })
-      console.log(res.data);
+      // console.log(res.data);
       if(res.data.status == false){
         setInvalidLogin(true);
       }else{
         setInvalidLogin(false);
       }
       setUserData(res.data._doc);
-      setLogged(res.data.status);
       saveToken('token',res.data.token);
       saveToken('role',res.data._doc.role);
+      const token = await new Promise((resolve,reject)=>{      
+        resolve(getValueFor('token'));
+      })
+      setLogged(token.status);
+      setLoginToken(token.token);
       setIsAdmin(res.data._doc.role == 'student' ? false : true);
       setIsLoading(false);
     }catch(e){
@@ -159,12 +166,11 @@ export default function App() {
   }
   async function logoutHandler(){
     await new Promise((resolve,reject)=>{
-      resolve(removeToken('token'));
+      removeToken('token')
+      removeToken('role')
+      setLogged(false);
+      resolve();
     })
-    await new Promise((resolve,reject)=>{
-      resolve(removeToken('role'));
-    })
-    setLogged(false);
   }
 
   async function studentList(){

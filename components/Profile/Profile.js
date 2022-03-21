@@ -46,12 +46,17 @@ export default function Profile() {
     <View style={styles.profile_container}>
     <ScrollView >
       <View style={styles.image_section}>
-        {userData && (
+        {userData.profile_img ?  (
           <Image
           source={{uri:`http://192.168.129.20:8080/${userData.profile_img}`}}
           style={styles.profile_image}
         />
-        )}
+        ) : 
+        <Image
+          source={require("../../Image/male_profile.png")}
+          style={styles.profile_image}
+        />
+        }
 
         {profileImage && (
           <>

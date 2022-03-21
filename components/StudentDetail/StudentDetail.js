@@ -82,6 +82,8 @@ export default function StudentDetail({ route }) {
     dispatch({type:'ModalImage',payload:`http://192.168.129.20:8080/${receipt_img}`});
   },[])
 
+console.log(profile_img)  
+
   return (
     <View style={style.StudentDetail_main_container}>
       <ModalReceipt />
@@ -95,11 +97,19 @@ export default function StudentDetail({ route }) {
           }}
         >
           <View style={style.first_section}>
+            {profile_img  ? 
             <Image
               source={{uri:`http://192.168.129.20:8080/${profile_img}`}}
               style={style.profile_image}
               resizeMode="cover"
             />
+            :
+            <Image
+              source={require("../../Image/male_profile.png")}
+              style={style.profile_image}
+              resizeMode="cover"
+            />
+            }
             {/* name */}
             <Text style={style.text}>{first_name}</Text>
           </View>

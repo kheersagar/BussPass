@@ -20,10 +20,9 @@ const styles = ScaledSheet.create({
   },
   profile_pic:{
     flex:1,
-    width: '50@s',
-    height: '50@s',
-    borderRadius: '50@s' ,
-    overflow: "hidden",
+    width: 50,
+    height: 50,
+    borderRadius: 50 ,
   },
   info:{
     flex:1,
@@ -44,8 +43,8 @@ const styles = ScaledSheet.create({
     fontFamily:'System',
   },
   status:{
-    flex:1,
-    width: '50@s',
+    width: 25,
+    height:25,
   }
 })
 
