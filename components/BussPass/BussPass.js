@@ -27,14 +27,14 @@ export default function BussPass() {
 
   const {dispatch,isBusPass,userData} = useContext(MyContext);
 
-  const {qr_code} = userData;
-  
+  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img,profile_img,qr_code } = userData;
+
   useEffect(()=>{
     dispatch({type:'BUSS_PASS'});
   },[])
 
   if(isBusPass == false){
-    return <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator color='white'/></View>
+    return <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator color='black'/></View>
   }
 
 
@@ -42,33 +42,38 @@ export default function BussPass() {
     {
       id: 1,
       title: "Branch",
-      value: 'branch',
+      value: branch,
     },
     {
       id: 2,
       title: "Semester",
-      value: 'asd',
+      value: `${semester}th`,
     },
     {
       id: 3,
       title: "Enrollment No.",
-      value: "username",
+      value: username,
     },
     {
       id: 4,
       title: "Bus No.",
-      value: "bus_no",
+      value: bus_no,
     },
     {
       id: 5,
       title: "Pickup Point",
-      value: "pickup_point",
+      value: pickup_point,
+    },
+    {
+      id: 6,
+      title: "Address",
+      value: address,
     },
   ];
   return (
     <View style={styles.container}>
-      <ScrollView>
       <ImageBackground source={require("../../Image/bussPassBackground.png")}  style={styles.image}>
+      <ScrollView>
         <View style={styles.first_section}>
           <Image source={require("../../Image/opju_logo.png")} style={{width:'50%',height:80}} resizeMode="contain"/>
           <Image source={require("../../Image/profile.jpg")} style={styles.profile_image} resizeMode="contain"/>
@@ -92,15 +97,15 @@ export default function BussPass() {
             <Text>Approved</Text>
           </View>
         </View>
-      </ImageBackground>
       </ScrollView>
+      </ImageBackground>
     </View>
   )
 }
 
 const styles = ScaledSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     // height:'100%'
   },
   first_section:{
@@ -112,7 +117,6 @@ const styles = ScaledSheet.create({
   second_section:{
     flexDirection:'row',
     alignItems:'flex-start',
-    width:'100%',
     paddingHorizontal:'20@s',
     marginTop:'10@s',
     borderTopWidth:'1@s',
@@ -128,20 +132,17 @@ const styles = ScaledSheet.create({
     borderColor:'gray',
   },
   image: {
-    flex: 1,
-    justifyContent:'center',
-    alignItems:'center',
+    flex:1,
     padding:20,
   },
   profile_image:{
     width: '100%', 
-    height: 250 ,
+    height: 200 ,
     borderRadius:'10@s',
     borderBottomLeftRadius:'30@s',
     borderBottomRightRadius:'30@s'
   },
   Detail_row:{
-    // flex:1,
     flexDirection:'row',
     paddingBottom:'5@s',
    },

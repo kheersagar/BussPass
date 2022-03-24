@@ -103,6 +103,7 @@ export default function App() {
 
   //loading
   const [isAppliedLoading,setIsAppliedLoading] = useState(false);
+  const [isUpdateProfileLoading,setIsUpdateProfileLoading] = useState(false);
 
   //isBus pass available
   const [isBusPass,setIsBusPass] = useState(false);
@@ -191,7 +192,8 @@ export default function App() {
   }
 
   async function updateUserData(){
-    console.log("called")
+    // console.log("called")
+    setIsUpdateProfileLoading(true);
     const formData = new FormData();
 
     formData.append('userId', loginToken);
@@ -207,6 +209,7 @@ export default function App() {
     });
     // console.log(await res.json());
     setUserData(await res.json());
+    setIsUpdateProfileLoading(false);
   }
 
   async function applyBussPass(){
@@ -251,6 +254,8 @@ export default function App() {
     console.log(res.data);
     if(res.data){
       setIsBusPass(true);
+    }else{
+      setIsBusPass(false);
     }
   }
 
@@ -296,7 +301,7 @@ export default function App() {
 
   return (
     <MyContext.Provider value={{dispatch,logged,studentData,currentStudentData,setLogged,getValueFor,removeToken,isAdmin,setIsAdmin,loginToken,setLoginToken,isLoading,invalidLogin,
-    modalVisible, setModalVisible,image, setImage,userData,profileImage,isAppliedLoading,isBusPass}}>
+    modalVisible, setModalVisible,image, setImage,userData,profileImage,isAppliedLoading,isBusPass,isUpdateProfileLoading}}>
       <NavigationContainer>
         <MainStack />
       </NavigationContainer>

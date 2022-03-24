@@ -150,12 +150,12 @@ export default function ApplyBussPass() {
           <View style={style.third_section}>
             <TouchableOpacity
               style={style.apply_btn}
-              disabled={status == 1 ? true: false}
+              disabled={status === 1 || !image? true: false}
               onPress={()=>{
                 dispatch({type:'APPLY_BUSS_PASS'})
               }}
             >
-             {isAppliedLoading ? <ActivityIndicator color='white'/> : <Text style={style.apply_btn_text}>{status != 1 ? 'Apply' : 'Applied'}</Text>}
+             {isAppliedLoading ? <ActivityIndicator color='white'/> : <Text style={style.apply_btn_text}>{status === 0 || status === 3 ? 'Apply' : 'Applied'}</Text>}
             </TouchableOpacity>
           </View>
         </LinearGradient>

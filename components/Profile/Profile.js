@@ -10,10 +10,10 @@ import { MyContext } from "../../App";
 
 export default function Profile() {
 
-  const {userData,profileImage,dispatch} = useContext(MyContext);
+  const {userData,profileImage,dispatch,isUpdateProfileLoading} = useContext(MyContext);
 
   if(userData == undefined){
-    return   <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator color='white'/></View>
+    return   <View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator color='black'/></View>
   }
 
   useEffect(() => {
@@ -78,12 +78,12 @@ export default function Profile() {
             <Text>Name</Text>
             <TextInput  placeholder={first_name + " " + last_name} style={styles.input} />
           </View>
-          <View style={{ justifyContent: "center" }}>
+          {/* <View style={{ justifyContent: "center" }}>
             <Image
               source={require("../../Image/Icons/edit.png")}
               style={styles.edit_icon}
             />
-          </View>
+          </View> */}
         </View>
         {/* 2 */}
         <View style={styles.text_input}>
@@ -91,12 +91,12 @@ export default function Profile() {
             <Text>Branch</Text>
             <TextInput  placeholder={branch} style={styles.input} />
           </View>
-          <View style={{ justifyContent: "center" }}>
+          {/* <View style={{ justifyContent: "center" }}>
             <Image
               source={require("../../Image/Icons/edit.png")}
               style={styles.edit_icon}
             />
-          </View>
+          </View> */}
         </View>
         {/* 3 */}
         <View style={styles.text_input}>
@@ -104,12 +104,12 @@ export default function Profile() {
             <Text>Semester</Text>
             <TextInput  placeholder={semester.toString() + "th"} keyboardType='number-pad' style={styles.input} />
           </View>
-          <View style={{ justifyContent: "center" }}>
+          {/* <View style={{ justifyContent: "center" }}>
             <Image
               source={require("../../Image/Icons/edit.png")}
               style={styles.edit_icon}
             />
-          </View>
+          </View> */}
         </View>
         {/* 4 */}
         <View style={styles.text_input}>
@@ -117,12 +117,12 @@ export default function Profile() {
             <Text>Phone No</Text>
             <TextInput  placeholder={phone_no.toString()} keyboardType='number-pad' style={styles.input} />
           </View>
-          <View style={{ justifyContent: "center" }}>
+          {/* <View style={{ justifyContent: "center" }}>
             <Image
               source={require("../../Image/Icons/edit.png")}
               style={styles.edit_icon}
             />
-          </View>
+          </View> */}
         </View>
         {/* 5 */}
         <View style={styles.text_input}>
@@ -130,12 +130,12 @@ export default function Profile() {
             <Text>Address</Text>
             <TextInput  placeholder={address} style={styles.input} />
           </View>
-          <View style={{ justifyContent: "center" }}>
+          {/* <View style={{ justifyContent: "center" }}>
             <Image
               source={require("../../Image/Icons/edit.png")}
               style={styles.edit_icon}
             />
-          </View>
+          </View> */}
         </View>
         {/* 2 */}
         <View style={styles.text_input}>
@@ -143,17 +143,17 @@ export default function Profile() {
             <Text>Email Id</Text>
             <TextInput  placeholder={email}  style={styles.input} />
           </View>
-          <View style={{ justifyContent: "center" }}>
+          {/* <View style={{ justifyContent: "center" }}>
             <Image
               source={require("../../Image/Icons/edit.png")}
               style={styles.edit_icon}
             />
-          </View>
+          </View> */}
         </View>
       </View>
       <View style={styles.btn_section}>
         <TouchableOpacity style={styles.save_btn} onPress={()=>{dispatch({type:'UPDATE_PROFILE',payload:profileImage}); dispatch({type:'CLEAR_PROFILE'})}}>
-            <Text style={styles.btn_text}>Save</Text>
+          {isUpdateProfileLoading ? <ActivityIndicator color='white'/> :<Text style={styles.btn_text}>Save</Text>}
         </TouchableOpacity>
       </View>
       </ScrollView>
