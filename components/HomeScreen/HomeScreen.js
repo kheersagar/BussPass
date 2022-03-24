@@ -4,7 +4,6 @@ import { View, Text, Image } from "react-native";
 import { FlatList, ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import style from "./HomeScreenStyle";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { MyContext } from "../../App";
 
 function Card({value,icon,navigation,navigationPath}) {
@@ -62,14 +61,14 @@ export default function HomeScreen() {
   ] : [{
     id: 1,
     title: "Apply",
-    icon: require('../../Image/Icons/search.png'),
+    icon: require('../../Image/Icons/bus.png'),
     navigationPath:'apply-buss-pass'
   },
   {
     id: 2,
     title: "Your Buss Pass",
-    icon: require('../../Image/Icons/setting.png'),
-    navigationPath:'profile'
+    icon: require('../../Image/Icons/pass.png'),
+    navigationPath:'buss-pass'
   },
   {
     id: 3,
@@ -102,6 +101,7 @@ export default function HomeScreen() {
           <FlatList 
             data={data}
             numColumns={2}
+            scrollEnabled={false}
             renderItem={({item})=>{
              return <Card  value={item.title} icon={item.icon} navigation={navigation} navigationPath={item.navigationPath}/>
             }}

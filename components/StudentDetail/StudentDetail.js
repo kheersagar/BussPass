@@ -116,6 +116,7 @@ console.log(profile_img)
           <View style={style.second_section}>
             <FlatList
               data={data}
+              scrollEnabled={false}
               keyExtractor={data.id}
               renderItem={({ item }) => (
                 <Detail title={item.title} value={item.value} />

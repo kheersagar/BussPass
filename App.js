@@ -104,6 +104,9 @@ export default function App() {
   //loading
   const [isAppliedLoading,setIsAppliedLoading] = useState(false);
 
+  //isBus pass available
+  const [isBusPass,setIsBusPass] = useState(false);
+
   async function saveToken(key, value) {
     await SecureStore.setItemAsync(key, value);
   }
@@ -224,7 +227,9 @@ export default function App() {
          method: "POST",
          body: formData,
        });
-       if(await res.json()){
+       const result  = await res.json(); 
+       if(result){    
+         setUserData(result);
          setIsAppliedLoading(false);
        }
     }catch(e){
@@ -238,6 +243,17 @@ export default function App() {
       status:status
     });
   }
+
+  async function bussPass(){
+    const res = await axios.post("http://192.168.129.20:8080/get-buss-pass",{
+      userId: loginToken
+    });
+    console.log(res.data);
+    if(res.data){
+      setIsBusPass(true);
+    }
+  }
+
   //Reducer
   function reducer(state, action) {
     switch(action.type){
@@ -271,6 +287,8 @@ export default function App() {
       break;
       case 'BUSS_PASS_APPROVED' : bussPassApproved(action.payload,action._id);
       break;
+      case 'BUSS_PASS' : bussPass();
+      break;
       default : return true;                     
     }
   }
@@ -278,7 +296,7 @@ export default function App() {
 
   return (
     <MyContext.Provider value={{dispatch,logged,studentData,currentStudentData,setLogged,getValueFor,removeToken,isAdmin,setIsAdmin,loginToken,setLoginToken,isLoading,invalidLogin,
-    modalVisible, setModalVisible,image, setImage,userData,profileImage,isAppliedLoading}}>
+    modalVisible, setModalVisible,image, setImage,userData,profileImage,isAppliedLoading,isBusPass}}>
       <NavigationContainer>
         <MainStack />
       </NavigationContainer>

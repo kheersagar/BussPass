@@ -9,6 +9,7 @@ import LogoTitle from "../components/LogoTitle/LogoTitle";
 import Login from "../components/Login/Login";
 import Profile from "../components/Profile/Profile";
 import ApplyBussPass from "../components/ApplyBussPass/ApplyBussPass";
+import BussPass from "../components/BussPass/BussPass";
 
 const Stack = createNativeStackNavigator();
 
@@ -74,6 +75,14 @@ export default function HomeStack() {
         component={ApplyBussPass}
         options={{
           title: "Apply", //Set Header Title
+          headerRight: () => <Header />,
+        }}
+      />
+      <Stack.Screen
+        name="buss-pass"
+        component={BussPass}
+        options={{
+          title: "Buss Pass", //Set Header Title
           headerRight: () => <Header />,
         }}
       />
