@@ -7,6 +7,7 @@ import * as ImagePicker from "expo-image-picker";
 import { ScaledSheet } from "react-native-size-matters";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { MyContext } from "../../App";
+import { HOST_URL } from "../../variables";
 
 export default function Profile() {
 
@@ -48,7 +49,7 @@ export default function Profile() {
       <View style={styles.image_section}>
         {userData.profile_img ?  (
           <Image
-          source={{uri:`http://192.168.129.20:8080/${userData.profile_img}`}}
+          source={{uri:`${HOST_URL}/${userData.profile_img}`}}
           style={styles.profile_image}
         />
         ) : 

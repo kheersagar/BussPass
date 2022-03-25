@@ -14,6 +14,7 @@ import style from "./Studentstyle";
 
 import axios from "axios";
 import ModalReceipt from "../ModalReceipt/ModalReceipt";
+import { HOST_URL } from "../../variables";
 
 function onClickHandler(message,dispatch,_id) {
   if(message === 'Approve'){    
@@ -79,7 +80,7 @@ export default function StudentDetail({ route }) {
     },
   ];
   useEffect(()=>{
-    dispatch({type:'ModalImage',payload:`http://192.168.129.20:8080/${receipt_img}`});
+    dispatch({type:'ModalImage',payload:`${HOST_URL}/${receipt_img}`});
   },[])
 
 console.log(profile_img)  
@@ -99,7 +100,7 @@ console.log(profile_img)
           <View style={style.first_section}>
             {profile_img  ? 
             <Image
-              source={{uri:`http://192.168.129.20:8080/${profile_img}`}}
+              source={{uri:`${HOST_URL}/${profile_img}`}}
               style={style.profile_image}
               resizeMode="cover"
             />
@@ -131,12 +132,14 @@ console.log(profile_img)
             {receipt_img ?
             <Image
               source={{
-                uri: `http://192.168.129.20:8080/${receipt_img}`,
+                uri: `${HOST_URL}/${receipt_img}`,
               }}
               style={style.receipt_image}
               resizeMode="contain"
             />
-            : <Text>No receipt Found</Text>}
+            : <View style={{justifyContent:'center',alignItems:'center'}}>
+              <Text>No receipt Found</Text>
+            </View>}
             </TouchableOpacity>
           </View>
           <View style={style.third_section}>

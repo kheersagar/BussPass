@@ -16,6 +16,7 @@ import { ScaledSheet } from "react-native-size-matters";
 import { LinearGradient } from "expo-linear-gradient";
 import { MyContext } from "../../App";
 import ModalReceipt from "../ModalReceipt/ModalReceipt";
+import { HOST_URL } from "../../variables";
 
 export default function ApplyBussPass() {
 
@@ -103,7 +104,7 @@ export default function ApplyBussPass() {
           <View style={style.first_section}>
           {userData.profile_img ? 
             <Image
-              source={{uri:`http://192.168.129.20:8080/${userData.profile_img}`}}
+              source={{uri:`${HOST_URL}/${userData.profile_img}`}}
               style={style.profile_image}
               resizeMode="cover"
             />
@@ -150,7 +151,7 @@ export default function ApplyBussPass() {
           <View style={style.third_section}>
             <TouchableOpacity
               style={style.apply_btn}
-              disabled={status === 1 || !image? true: false}
+              disabled={status === 1 || !image || isAppliedLoading ? true: false}
               onPress={()=>{
                 dispatch({type:'APPLY_BUSS_PASS'})
               }}

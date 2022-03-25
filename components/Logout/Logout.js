@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
 import React, { useContext } from "react";
-import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 

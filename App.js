@@ -7,83 +7,12 @@ import * as SecureStore from 'expo-secure-store';
 import MainStack from "./stacks/MainStack";
 import axios from "axios";
 
+import {HOST_URL} from "./variables"
+
+
 const MyContext = createContext();
 
 export default function App() {
-  // const DATA = [
-  //   {
-  //     id: "bd7acbeaas-c1b1-46c2-aadaded5-3asdfdd53abb28ba",
-  //     title: "Kheersagar Parja",
-  //     image:
-  //       "https://media-exp1.licdn.com/dms/image/C5603AQEkuyp3J4Tirg/profile-displayphoto-shrink_800_800/0/1608468923158?e=1652313600&v=beta&t=uKU4zthYP5GoM4HDeYHXweIxAn45OlmTWtqth-GEAfQ",
-  //   },
-  //   {
-  //     id: "3ac68afc-c6a05-48dfasd3-aadad4f8-fbd91aa97f63",
-  //     title: "Sarthak",
-  //     image:
-  //       "https://i.pinimg.com/originals/48/35/b5/4835b5f9c52fd733eb26fb2c2b47bdc7.jpg",
-  //   },
-  //   {
-  //     id: "58694a0f-3dsa1-47asd1fs-bd96sdfsdfadsdsf-145571e29d72",
-  //     title: "Swati Mishra",
-  //     image:
-  //       "https://media-exp1.licdn.com/dms/image/C4E03AQGbGWI5Nk6AnQ/profile-displayphoto-shrink_400_400/0/1624343531061?e=1652313600&v=beta&t=3jfAG-rxPGA1YcZKiMfyTTVdjnaxiYcUAbbdjUnqg9s",
-  //   },
-  //   {
-  //     id: "bd7acbea-c1sb1-46c2-aed5-3asdfdd53sdabb28ba",
-  //     title: "Kheersagar Parja",
-  //     image:
-  //       "https://media-exp1.licdn.com/dms/image/C5603AQEkuyp3J4Tirg/profile-displayphoto-shrink_800_800/0/1608468923158?e=1652313600&v=beta&t=uKU4zthYP5GoM4HDeYHXweIxAn45OlmTWtqth-GEAfQ",
-  //   },
-  //   {
-  //     id: "3ac68afc-c6s05-48dfasd3-a4f8-fbd9dsfa1aa97f63",
-  //     title: "Sarthak",
-  //     image:
-  //       "https://i.pinimg.com/originals/48/35/b5/4835b5f9c52fd733eb26fb2c2b47bdc7.jpg",
-  //   },
-  //   {
-  //     id: "58694a0f-3da1s-47asd1fs-bd96sdfsdsfdf-145571e29d72",
-  //     title: "Swati Mishra",
-  //     image:
-  //       "https://media-exp1.licdn.com/dms/image/C4E03AQGbGWI5Nk6AnQ/profile-displayphoto-shrink_400_400/0/1624343531061?e=1652313600&v=beta&t=3jfAG-rxPGA1YcZKiMfyTTVdjnaxiYcUAbbdjUnqg9s",
-  //   },
-  //   {
-  //     id: "bd7acbea-c1sb1-46c2-aed5-3asdfdsfd53abb28ba",
-  //     title: "Kheersagar Parja",
-  //     image:
-  //       "https://media-exp1.licdn.com/dms/image/C5603AQEkuyp3J4Tirg/profile-displayphoto-shrink_800_800/0/1608468923158?e=1652313600&v=beta&t=uKU4zthYP5GoM4HDeYHXweIxAn45OlmTWtqth-GEAfQ",
-  //   },
-  //   {
-  //     id: "3ac68afc-c605-4sdsad8dffddasd3-a4f8-fbd91aa97f63",
-  //     title: "Sarthak",
-  //     image:
-  //       "https://i.pinimg.com/originals/48/35/b5/4835b5f9c52fd733eb26fb2c2b47bdc7.jpg",
-  //   },
-  //   {
-  //     id: "58694a0f-3da1-4asdasd7asd1fs-bd96sdfsdf-145571e29d72",
-  //     title: "Swati Mishra",
-  //     image:
-  //       "https://media-exp1.licdn.com/dms/image/C4E03AQGbGWI5Nk6AnQ/profile-displayphoto-shrink_400_400/0/1624343531061?e=1652313600&v=beta&t=3jfAG-rxPGA1YcZKiMfyTTVdjnaxiYcUAbbdjUnqg9s",
-  //   },
-  //   {
-  //     id: "bd7acbea-c1asdasdb1-46c2-aed5-3asdfdd53abb28ba",
-  //     title: "Kheersagar Parja Parja",
-  //     image:
-  //       "https://media-exp1.licdn.com/dms/image/C5603AQEkuyp3J4Tirg/profile-displayphoto-shrink_800_800/0/1608468923158?e=1652313600&v=beta&t=uKU4zthYP5GoM4HDeYHXweIxAn45OlmTWtqth-GEAfQ",
-  //   },
-  //   {
-  //     id: "3ac68afc-c605asdasd-48dfasd3-a4f8-fbd91aa97f63",
-  //     title: "Sarthak",
-  //     image:
-  //       "https://i.pinimg.com/originals/48/35/b5/4835b5f9c52fd733eb26fb2c2b47bdc7.jpg",
-  //   },
-  //   {
-  //     id: "58694a0f-3da1-47asd1fasdsas-bd96sdfsdf-145571e29d72",
-  //     title: "Swati Mishra",
-  //     image:
-  //       "https://media-exp1.licdn.com/dms/image/C4E03AQGbGWI5Nk6AnQ/profile-displayphoto-shrink_400_400/0/1624343531061?e=1652313600&v=beta&t=3jfAG-rxPGA1YcZKiMfyTTVdjnaxiYcUAbbdjUnqg9s",
-  //   },
-  // ];
 
   const [enrollment, setEnrollment] = useState();
   const [password, setPassword] = useState();
@@ -135,10 +64,10 @@ export default function App() {
     }
   }
   async function submitHandler() {
-    // console.log(enrollment,password);
+    console.log(`${HOST_URL}/Auth`);
     setIsLoading(true);
     try{
-      const res = await axios.get("http://192.168.129.20:8080/Auth",{
+      const res = await axios.get(`${HOST_URL}/Auth`,{
         params:{
           username:enrollment,
           password:password
@@ -168,6 +97,7 @@ export default function App() {
       console.log("error on login " + e);
     }
   }
+
   async function logoutHandler(){
     await new Promise((resolve,reject)=>{
       removeToken('token')
@@ -178,14 +108,14 @@ export default function App() {
   }
 
   async function studentList(){
-      const res = await axios.get("http://192.168.129.20:8080/studentData");
+      const res = await axios.get(`${HOST_URL}/studentData`);
       if( res.data != null){
         setStudentData(res.data);
       }
   }
 
   async function studentStatusList(){
-    const res = await axios.get("http://192.168.129.20:8080/student-status-list");
+    const res = await axios.get(`${HOST_URL}/student-status-list`);
     if( res.data != null){
       setStudentData(res.data);
     }
@@ -203,7 +133,7 @@ export default function App() {
       type: 'image/jpg',
     } );
 
-    const res = await fetch("http://192.168.129.20:8080/update-profile", {
+    const res = await fetch(`${HOST_URL}/update-profile`, {
       method: "POST",
       body: formData,
     });
@@ -226,7 +156,7 @@ export default function App() {
     } );
     
     try{
-      const res =  await fetch("http://192.168.129.20:8080/apply-buss-pass", {
+      const res =  await fetch(`${HOST_URL}/apply-buss-pass`, {
          method: "POST",
          body: formData,
        });
@@ -241,14 +171,14 @@ export default function App() {
   }
 
   async function bussPassApproved(status,_id){
-    const res = await axios.post("http://192.168.129.20:8080/buss-pass-status",{
+    const res = await axios.post(`${HOST_URL}/buss-pass-status`,{
       userId: _id,
       status:status
     });
   }
 
   async function bussPass(){
-    const res = await axios.post("http://192.168.129.20:8080/get-buss-pass",{
+    const res = await axios.post(`${HOST_URL}/get-buss-pass`,{
       userId: loginToken
     });
     console.log(res.data);

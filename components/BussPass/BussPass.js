@@ -4,6 +4,7 @@ import { MyContext } from '../../App';
 import { FlatList } from 'react-native-gesture-handler';
 import { ScaledSheet } from 'react-native-size-matters';
 import { usePreventScreenCapture } from 'expo-screen-capture';
+import { HOST_URL } from '../../variables';
 
 function Detail({ value, title }) {
   return (
@@ -76,7 +77,7 @@ export default function BussPass() {
       <ScrollView>
         <View style={styles.first_section}>
           <Image source={require("../../Image/opju_logo.png")} style={{width:'50%',height:80}} resizeMode="contain"/>
-          <Image source={require("../../Image/profile.jpg")} style={styles.profile_image} resizeMode="contain"/>
+          <Image source={{uri:`${HOST_URL}/${profile_img}`}} style={styles.profile_image} resizeMode="contain"/>
         </View>
         <View style={styles.second_section}>
         <FlatList

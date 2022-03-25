@@ -41,7 +41,7 @@ function Login() {
           onChangeText={(e) => dispatch({type:'PasswordChangeHandler',payload:e})}
         />
         {invalidLogin ? <Text>Please Enter valid username / password</Text> : null}
-        <TouchableOpacity style={style.login_btn} onPress={()=>{dispatch({type:'login_submit'})}}>
+        <TouchableOpacity style={style.login_btn} disabled={isLoading} onPress={()=>{dispatch({type:'login_submit'})}}>
           {isLoading ? <ActivityIndicator color='white'/> : <Text style={style.btn_text}>Login</Text>}
         </TouchableOpacity>
       </View>

@@ -5,6 +5,7 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./style";
 import { MyContext } from "../../App";
+import { HOST_URL } from "../../variables";
 
 
 function Mylist({currenStudent, navigation,dispatch }) {
@@ -30,7 +31,7 @@ function Mylist({currenStudent, navigation,dispatch }) {
         {profile_img ? 
           <Image
             style={styles.profile_pic}
-            source={{uri:`http://192.168.129.20:8080/${profile_img}`}}
+            source={{uri:`${HOST_URL}/${profile_img}`}}
           />
           :
           <Image
