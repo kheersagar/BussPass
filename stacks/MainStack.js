@@ -25,8 +25,7 @@ export default function MainStack() {
   {logged ?       
   <>
   {/* If user is logged in can accessed home stack */}
-    <Drawer.Screen name="Home" component={HomeStack} />
-    <Drawer.Screen name="Profile" component={Profile} />    
+    <Drawer.Screen name="Home" component={HomeStack} /> 
     <Drawer.Screen name="Logout" component={Logout} />
     </>
     :

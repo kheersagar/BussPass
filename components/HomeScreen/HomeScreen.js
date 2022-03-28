@@ -50,7 +50,7 @@ export default function HomeScreen() {
       id: 3,
       title: "Status",
       icon: require('../../Image/Icons/search.png'),
-      navigationPath:'Status'
+      navigationPath:'status'
     },
     {
       id: 4,
@@ -74,7 +74,7 @@ export default function HomeScreen() {
     id: 3,
     title: "Status",
     icon: require('../../Image/Icons/search.png'),
-    navigationPath:'Status'
+    navigationPath:'status'
   },
   {
     id: 4,
@@ -92,8 +92,8 @@ export default function HomeScreen() {
           start={{ x: 0.3, y: 0.38 }}
           style={style.HomeScreen_heading}
         >
-            <Text style={[style.home_title,{fontSize:30}]}>Welcome To</Text>
-            <Text style={style.home_title}>BusPassFirst</Text>
+            <Text style={[style.home_title]}>Welcome To</Text>
+            <Text style={style.home_title_text}>BusPassFirst</Text>
         </LinearGradient>
       </View>
       <View style={style.Home_second_section}>      

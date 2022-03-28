@@ -27,10 +27,14 @@ const style = ScaledSheet.create({
     marginTop:'-50@s'
   },
   home_title:{
-    fontSize:'22@s',
+    fontSize:40,
     fontWeight:'bold',
     fontStyle:'normal',
-    lineHeight:'25@s'
+  },
+  home_title_text:{
+    fontSize:22,
+    fontWeight:'bold',
+    fontStyle:'normal',
   },
   Card_main_container:{
     width:'130@s',

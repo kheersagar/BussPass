@@ -36,9 +36,10 @@ const style = ScaledSheet.create({
   third_section:{
     flexDirection:'row',
     alignItems:'center',
-    justifyContent:'space-between',
+    justifyContent:'center',
     width:'100%',
-    paddingHorizontal:'10@s'
+    paddingHorizontal:'10@s',
+    paddingBottom:10,
   },
   decline:{
     width:'140@s',
@@ -47,6 +48,7 @@ const style = ScaledSheet.create({
     alignItems:'center',
     backgroundColor: '#E50202',
     borderRadius:'25@s',
+    marginHorizontal:10,
   },
   profile_button:{
     alignItems:'center',
@@ -60,7 +62,8 @@ const style = ScaledSheet.create({
     justifyContent:'center',
     alignItems:'center',
     borderRadius:'25@s',
-    backgroundColor:'#54E346'
+    backgroundColor:'#54E346',
+    marginHorizontal:10,
   },
   Detail_row_title:{
     fontSize:'18@s',
@@ -84,6 +87,24 @@ const style = ScaledSheet.create({
     width:'100%',
     height:200,
     borderRadius:10
+  },
+  reason:{
+    justifyContent:'center',
+    // alignItems:'center',
+    marginVertical:10,
+    // borderWidth:1,
+    borderRadius:20,
+    paddingHorizontal:20,
+  },
+  reason_title:{
+    fontWeight:'700',
+    fontSize:25,
+    color:'black'
+  },  
+  reason_text:{
+    fontSize:22,
+    fontWeight:'600',
+    color:'red'
   }
 });
 

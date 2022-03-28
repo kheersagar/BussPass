@@ -15,18 +15,17 @@ import style from "./Studentstyle";
 import axios from "axios";
 import ModalReceipt from "../ModalReceipt/ModalReceipt";
 import { HOST_URL } from "../../variables";
+import ModalDecline from "../ModalDecline/ModalDecline";
+import ModalSuccess from "../ModalDecline/ModalSuccess";
 
 function onClickHandler(message,dispatch,_id) {
   if(message === 'Approve'){    
     Alert.alert("Are you sure ?", message, [
-      { text: "Yes", onPress: () => dispatch({type:'BUSS_PASS_APPROVED',payload:2,_id:_id})},
+      { text: "Yes", onPress: () => dispatch({type:'BUSS_PASS_APPROVED',payload:2,_id:_id,reason:''})},
       { text: "No", onPress: () => console.log() },
     ]);
   }else{
-    Alert.alert("Are you sure ?", message, [
-      { text: "Yes", onPress: () => dispatch({type:'BUSS_PASS_APPROVED',payload:3,_id:_id})},
-      { text: "No", onPress: () => console.log() },
-    ]);
+    dispatch({type:'ModalDeclineVisible'})
   }
 }
 function Detail({ value, title }) {
@@ -50,7 +49,7 @@ export default function StudentDetail({ route }) {
 
   const { currentStudentData,dispatch } = useContext(MyContext);
 
-  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img,profile_img } = currentStudentData;
+  const { _id,username,first_name,last_name,address,branch,bus_no,email,phone_no,pickup_point,semester,receipt_img,profile_img,status,decline_reason } = currentStudentData;
   
   var data = [
     {
@@ -88,6 +87,8 @@ console.log(profile_img)
   return (
     <View style={style.StudentDetail_main_container}>
       <ModalReceipt />
+      <ModalDecline />
+      <ModalSuccess/>
       <ScrollView>
         <LinearGradient
           colors={["#FFB423", "#FDDB3A"]}
@@ -138,22 +139,28 @@ console.log(profile_img)
               resizeMode="contain"
             />
             : <View style={{justifyContent:'center',alignItems:'center'}}>
-              <Text>No receipt Found</Text>
+              <Text style={{fontSize:22,fontWeight:'bold'}}>No receipt Found</Text>
             </View>}
             </TouchableOpacity>
           </View>
+          <View style={[style.reason,{display: decline_reason ? null : 'none'}]} >
+              <Text style={style.reason_title}>Reason:</Text>
+              <Text style={style.reason_text}>{decline_reason}</Text>
+          </View>
           <View style={style.third_section}>
             <TouchableOpacity
-              style={style.decline}
+              style={[style.decline,{display: status === 2  ? 'none' : null }]}
+              disabled={status === 3}
               onPress={() => onClickHandler("Decline",dispatch,_id)}
             >
-              <Text style={style.profile_button}>Decline</Text>
+              <Text style={style.profile_button}>{status  === 3 ? 'Declined' : 'Decline'}</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={style.approve}
+              style={[style.approve,{display: status === 3 ? 'none' : null }]}
+              disabled={status === 2}
               onPress={() => onClickHandler("Approve",dispatch,_id)}
             >
-              <Text style={style.profile_button}>Approve</Text>
+              <Text style={style.profile_button}>{status === 2 ? 'Approved' :'Approve' }</Text>
             </TouchableOpacity>
           </View>
         </LinearGradient>

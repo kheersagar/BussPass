@@ -10,6 +10,7 @@ import Login from "../components/Login/Login";
 import Profile from "../components/Profile/Profile";
 import ApplyBussPass from "../components/ApplyBussPass/ApplyBussPass";
 import BussPass from "../components/BussPass/BussPass";
+import Status from "../components/Status/Status";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,7 +35,7 @@ export default function HomeStack() {
         name="List"
         component={List}
         options={{
-          title: "StudentList", //Set Header Title
+          title: "Student List", //Set Header Title
           headerRight: () => <Header />,
         }}
       />
@@ -43,7 +44,7 @@ export default function HomeStack() {
         name="studentDetail"
         component={StudentDetail}
         options={{
-          title: "StudentDetail", //Set Header Title
+          title: "Student Detail", //Set Header Title
           headerRight: () => <Header />,
         }}
       />
@@ -51,7 +52,7 @@ export default function HomeStack() {
         name="AllStudent"
         component={List}
         options={{
-          title: "StudentDetail", //Set Header Title
+          title: "Student Detail", //Set Header Title
           headerRight: () => <Header />,
         }}
       />
@@ -83,6 +84,19 @@ export default function HomeStack() {
         component={BussPass}
         options={{
           title: "Buss Pass", //Set Header Title
+          headerRight: () => <Header />,
+        }}
+      />
+        <Stack.Screen
+        name="status"
+        component={Status}
+        options={{
+          title: '', //Set Header Title
+          // headerTitle: (props) => <LogoTitle {...props} />,
+          headerStyle: {
+            backgroundColor: "#FFB423",
+          },
+          headerShadowVisible: false, //to hide shadow of header
           headerRight: () => <Header />,
         }}
       />

@@ -18,6 +18,71 @@ const styles = ScaledSheet.create({
     marginTop:'10@s',
     width:'90%'
   },
+  filter_dropdown:{
+    backgroundColor:'#0B194C',
+    // padding:20,
+    paddingHorizontal:20,
+    paddingTop:20,
+  },
+  filter_dropdown_text:{
+    color:'white',
+    fontWeight:'bold',
+    fontSize:22,
+  },
+  filter_dropdown_first:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    paddingBottom:10,
+    borderBottomWidth:1,
+    borderBottomColor:'white',
+  },
+  sort_strem:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    marginBottom: 20,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  checkbox: {
+    alignSelf: "center",
+    backgroundColor:'white',
+  },
+  label: {
+    margin: 8,
+    color:'white',
+  },
+  filter:{
+    flexDirection:'row',
+    backgroundColor:'#0B194C',
+    justifyContent:'center',
+    alignItems:'center',
+    paddingHorizontal:15,
+    borderBottomRightRadius:15,
+    borderBottomLeftRadius:15,
+  },
+  filter_text:{
+    color:'white',
+    fontWeight:'bold',
+    fontSize:24,
+  },
+  filter_btn_section:{
+    flexDirection:'row',
+    backgroundColor:'black',
+    justifyContent:'space-around',
+    borderRadius:10,
+    padding:10,
+  },
+  filter_btn:{
+    borderRadius:10,
+  },
+  btn_text:{
+    color:'white',
+    fontSize:22,
+  },
   profile_pic:{
     flex:1,
     width: 50,

@@ -22,6 +22,8 @@ export default function App() {
   const [isLoading,setIsLoading] = useState(false);
   const [invalidLogin,setInvalidLogin] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalDeclineVisible, setModalDeclineVisible] = useState(false);
+  const [modalSuccessVisible, setModalSuccessVisible] = useState(false);
   const [userData,setUserData] = useState(null);
   const [image, setImage] = useState(null);
   const [profileImage,setProfileImage] = useState(null);
@@ -170,11 +172,23 @@ export default function App() {
     }
   }
 
-  async function bussPassApproved(status,_id){
+  async function bussPassApproved(status,_id,reason){
     const res = await axios.post(`${HOST_URL}/buss-pass-status`,{
       userId: _id,
-      status:status
+      status:status,
+      reason:reason
     });
+    // console.log(res.data,status)
+    if(res.data && status === 3){
+        console.log("close called")
+        setModalDeclineVisible(false);
+        setModalSuccessVisible(true);
+        setCurrentStudentData(res.data)
+    }
+    else if(status === 2){
+      setCurrentStudentData(res.data)
+      
+    }
   }
 
   async function bussPass(){
@@ -218,9 +232,15 @@ export default function App() {
       break;
       case 'ModalReceiptClose' : setModalVisible(false);
       break;
+      case 'ModalDeclineVisible' : setModalDeclineVisible(true);
+      break;
+      case 'ModalDeclineClose' : setModalDeclineVisible(false);
+      break;
+      case 'ModalSucessClose' : setModalSuccessVisible(false);
+      break
       case 'APPLY_BUSS_PASS' : applyBussPass();
       break;
-      case 'BUSS_PASS_APPROVED' : bussPassApproved(action.payload,action._id);
+      case 'BUSS_PASS_APPROVED' : bussPassApproved(action.payload,action._id,action.reason);
       break;
       case 'BUSS_PASS' : bussPass();
       break;
@@ -231,7 +251,8 @@ export default function App() {
 
   return (
     <MyContext.Provider value={{dispatch,logged,studentData,currentStudentData,setLogged,getValueFor,removeToken,isAdmin,setIsAdmin,loginToken,setLoginToken,isLoading,invalidLogin,
-    modalVisible, setModalVisible,image, setImage,userData,profileImage,isAppliedLoading,isBusPass,isUpdateProfileLoading}}>
+    modalVisible, modalDeclineVisible,setModalVisible,image, setImage,userData,profileImage,isAppliedLoading,isBusPass,isUpdateProfileLoading,
+    modalSuccessVisible}}>
       <NavigationContainer>
         <MainStack />
       </NavigationContainer>
