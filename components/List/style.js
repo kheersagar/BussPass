@@ -41,6 +41,9 @@ const styles = ScaledSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
   },
+  sort_semester:{
+    paddingHorizontal:10,
+  },
   checkboxContainer: {
     flexDirection: "row",
     marginBottom: 20,
@@ -58,11 +61,12 @@ const styles = ScaledSheet.create({
   filter:{
     flexDirection:'row',
     backgroundColor:'#0B194C',
-    justifyContent:'center',
+    justifyContent:'space-around',
     alignItems:'center',
     paddingHorizontal:15,
     borderBottomRightRadius:15,
     borderBottomLeftRadius:15,
+    padding:10,
   },
   filter_text:{
     color:'white',

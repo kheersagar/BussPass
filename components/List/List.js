@@ -70,7 +70,9 @@ function List({ navigation }) {
   console.log(currentroute);
   const { studentData, dispatch } = useContext(MyContext);
 
+  const [data,setData] = useState();
   const [isDropdown, setIsDropdown] = useState(false);
+
   const initialValues = {
     btech: false,
     mtech: false,
@@ -116,17 +118,19 @@ function List({ navigation }) {
     }
   }, [currentroute]);
 
-  if (!studentData) {
+  useEffect(()=>{
+    setData(studentData)
+  },[studentData])
+
+  if (!studentData || !data) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator color="white" />
       </View>
     );
   }
-const [data,setData] = useState(studentData);
 
   function filterHandler(){
-    console.log(keyValue.bba);
 
     const res = studentData.filter((item) =>{
        return ( 
@@ -269,7 +273,7 @@ const [data,setData] = useState(studentData);
           </View>
         </View>
         {/* semester */}
-        <View style={styles.sort_strem}>
+        <View style={[styles.sort_strem,styles.sort_semester]}>
           <View style={styles.col1}>
             <View style={styles.checkboxContainer}>
               <Text style={styles.label}>1st</Text>
@@ -388,7 +392,6 @@ const [data,setData] = useState(studentData);
       </View>
     );
   }
-
 
 
   return (
