@@ -77,7 +77,7 @@ export default function BussPass() {
       <ScrollView>
         <View style={styles.first_section}>
           <Image source={require("../../Image/opju_logo.png")} style={{width:'50%',height:80}} resizeMode="contain"/>
-          <Image source={{uri:`${HOST_URL}/${profile_img}`}} style={styles.profile_image} resizeMode="contain"/>
+          <Image source={{uri:profile_img}} style={styles.profile_image} resizeMode="contain"/>
         </View>
         <View style={styles.second_section}>
         <FlatList
