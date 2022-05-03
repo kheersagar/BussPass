@@ -104,7 +104,7 @@ export default function ApplyBussPass() {
           <View style={style.first_section}>
           {userData.profile_img ? 
             <Image
-              source={{uri:`${HOST_URL}/${userData.profile_img}`}}
+              source={{uri:userData.profile_img}}
               style={style.profile_image}
               resizeMode="cover"
             />
@@ -128,7 +128,7 @@ export default function ApplyBussPass() {
             />
           </View>
           <View style={style.receipt_image_section}>
-            <TouchableOpacity style={style.pickImage_btn} onPress={pickImage}>
+            <TouchableOpacity style={style.pickImage_btn}  disabled={status === 1 || status === 2} onPress={pickImage}>
               <Image
                 source={require("../../Image/Icons/edit_img.png")}
                 style={{ width: 40, height: 40 }}
@@ -151,7 +151,7 @@ export default function ApplyBussPass() {
           <View style={style.third_section}>
             <TouchableOpacity
               style={style.apply_btn}
-              disabled={status === 1 || !image || isAppliedLoading ? true: false}
+              disabled={status === 1 || status === 2 || !image || isAppliedLoading ? true: false}
               onPress={()=>{
                 dispatch({type:'APPLY_BUSS_PASS'})
               }}

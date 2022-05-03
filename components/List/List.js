@@ -35,7 +35,7 @@ function Mylist({ currenStudent, navigation, dispatch }) {
           {profile_img ? (
             <Image
               style={styles.profile_pic}
-              source={{ uri: `${HOST_URL}/${profile_img}` }}
+              source={{ uri: profile_img }}
             />
           ) : (
             <Image
@@ -116,7 +116,7 @@ function List({ navigation }) {
     } else if (currentroute == "List") {
       dispatch({ type: "STUDENT_STATUS_LIST" });
     }
-  }, [currentroute]);
+  }, []);
 
   useEffect(()=>{
     setData(studentData)
@@ -125,7 +125,7 @@ function List({ navigation }) {
   if (!studentData || !data) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator color="white" />
+        <ActivityIndicator color="black" />
       </View>
     );
   }
@@ -395,7 +395,7 @@ function List({ navigation }) {
 
 
   return (
-    <View>
+    <View style={{flex:1}}>
       <View style={[styles.filter, { display: isDropdown ? "none" : null }]}>
         <TouchableOpacity onPress={() => setIsDropdown(true)}>
           <Image

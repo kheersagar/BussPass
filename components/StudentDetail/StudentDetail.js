@@ -101,7 +101,7 @@ console.log(profile_img)
           <View style={style.first_section}>
             {profile_img  ? 
             <Image
-              source={{uri:`${HOST_URL}/${profile_img}`}}
+              source={{uri:profile_img}}
               style={style.profile_image}
               resizeMode="cover"
             />
@@ -133,7 +133,7 @@ console.log(profile_img)
             {receipt_img ?
             <Image
               source={{
-                uri: `${HOST_URL}/${receipt_img}`,
+                uri: receipt_img,
               }}
               style={style.receipt_image}
               resizeMode="contain"

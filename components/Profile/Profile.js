@@ -49,7 +49,7 @@ export default function Profile() {
       <View style={styles.image_section}>
         {userData.profile_img ?  (
           <Image
-          source={{uri:`${HOST_URL}/${userData.profile_img}`}}
+          source={{uri:userData.profile_img}}
           style={styles.profile_image}
         />
         ) : 
