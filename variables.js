@@ -1,1 +1,0 @@
-export  const HOST_URL = 'http://192.168.203.20:8080'
