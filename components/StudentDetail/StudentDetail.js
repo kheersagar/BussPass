@@ -79,7 +79,7 @@ export default function StudentDetail({ route }) {
     },
   ];
   useEffect(()=>{
-    dispatch({type:'ModalImage',payload:`${HOST_URL}/${receipt_img}`});
+    dispatch({type:'ModalImage',payload:receipt_img});
   },[])
 
 console.log(profile_img)  
