@@ -46,6 +46,7 @@ anything with minimum length 6 character.</p>
 <h2>1.4 Status Screen </h2>
 <p align="center">
     <img src="./assets/status.jpeg"  height="300" />
+    <img src="./assets/status-2.jpeg"  height="300" />
 </p>
   This screen helps user to track the application status submitted for bus pass. If bus pass is 
   approved it will let user know and if the bus pass is decline and a reason for decline is 
@@ -58,7 +59,7 @@ anything with minimum length 6 character.</p>
   serve which can be used to cross verify the user.
 <h2>1.6 Student List Screen</h2>
 <p align="center">
-    <img src="./assets/home.jpeg"  height="300" />
+    <img src="./assets/list.jpeg"  height="300" />
     <img src="./assets/list-2.jpeg"  height="300" />
     <img src="./assets/filter.jpeg"  height="300" />
 </p>
@@ -74,5 +75,8 @@ anything with minimum length 6 character.</p>
 </p>
 This Screen is for Admin where Admin can track the application which have approved or 
 declined by him.
+<p align="center">
     <img src="./assets/logout.jpeg"  height="300" />
+
+</p>
 
