@@ -21,6 +21,7 @@ the he can Decline the request and also give the note what went wrong. Students 
 their application status, Reasons of Decline (if declined). If Application is approved Student 
 will have auto generated Bus pass with QR code attached to it which can be used for further 
 verification.</p>
+<img src="./assets/home.jpeg"/>
 <h2>1.1 Login Screen</h2>
 <p>To use the Application user, have to login using the valid credentials, here roll number of 
 the student is used and the username to uniquely identify the student and password can be 
