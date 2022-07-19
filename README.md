@@ -23,6 +23,7 @@ will have auto generated Bus pass with QR code attached to it which can be used 
 verification.</p>
 <p align="center">
     <img src="./assets/home.jpeg"  height="300" />
+    <img src="./assets/admin-home.jpeg"  height="300" />
 </p>
 <h2>1.1 Login Screen</h2>
 <p>To use the Application user, have to login using the valid credentials, here roll number of 
@@ -57,7 +58,9 @@ anything with minimum length 6 character.</p>
   serve which can be used to cross verify the user.
 <h2>1.6 Student List Screen</h2>
 <p align="center">
-    <img src="./assets/list.jpeg"  height="300" />
+    <img src="./assets/home.jpeg"  height="300" />
+    <img src="./assets/list-2.jpeg"  height="300" />
+    <img src="./assets/filter.jpeg"  height="300" />
 </p>
   This screen shows all the students list applied for bus pass and can look at the details of 
   single request as well and then perform necessary action can approve the request of decline 
@@ -71,3 +74,5 @@ anything with minimum length 6 character.</p>
 </p>
 This Screen is for Admin where Admin can track the application which have approved or 
 declined by him.
+    <img src="./assets/logout.jpeg"  height="300" />
+
