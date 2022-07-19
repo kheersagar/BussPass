@@ -22,21 +22,30 @@ their application status, Reasons of Decline (if declined). If Application is ap
 will have auto generated Bus pass with QR code attached to it which can be used for further 
 verification.</p>
 <p align="center">
-    <img src="./assets/home.jpeg" width="800" height="600" />
+    <img src="./assets/home.jpeg"  height="300" />
 </p>
 <h2>1.1 Login Screen</h2>
 <p>To use the Application user, have to login using the valid credentials, here roll number of 
 the student is used and the username to uniquely identify the student and password can be 
 anything with minimum length 6 character.</p>
 <h2>1.2Apply Screen</h2>
+<p align="center">
+    <img src="./assets/apply.jpeg"  height="300" />
+</p>
   It contains the already filled user details and shows the student before applying for bus pass. 
   It contains Upload Receipt feature though which student can upload receipt of fee paid for 
   availing bus facility directly from their phone. After verification student can click on apply 
   button and application will be sent to the admin for further process.
 <h2>1.3 Profile Screen</h2>
+<p align="center">
+    <img src="./assets/profile.jpeg"  height="300" />
+</p>
   This Screen displays the user details and gives the option to update the user details as well 
   as user profile image which is used while applying for bus pass and auto generated bus pass.
 <h2>1.4 Status Screen </h2>
+<p align="center">
+    <img src="./assets/status.jpeg"  height="300" />
+</p>
   This screen helps user to track the application status submitted for bus pass. If bus pass is 
   approved it will let user know and if the bus pass is decline and a reason for decline is 
   attached to it, it will let user know the reason as well, then user can make correction and 
@@ -47,10 +56,18 @@ anything with minimum length 6 character.</p>
   This code contains user details which cannot be altered as it is directly coming from the 
   serve which can be used to cross verify the user.
 <h2>1.6 Student List Screen</h2>
+<p align="center">
+    <img src="./assets/list.jpeg"  height="300" />
+</p>
   This screen shows all the students list applied for bus pass and can look at the details of 
   single request as well and then perform necessary action can approve the request of decline 
   the request. This screen also contains filter to filtered application based the branch and 
   semester of the student applied for the bus pass.
 <h2>1.6 Approval/Decline Screen</h2>
+<p align="center">
+    <img src="./assets/verify.jpeg"  height="300" />
+    <img src="./assets/decline.jpeg"  height="300" />
+    <img src="./assets/success.jpeg"  height="300" />
+</p>
 This Screen is for Admin where Admin can track the application which have approved or 
 declined by him.
