@@ -25,7 +25,7 @@ verification.</p>
 <p>To use the Application user, have to login using the valid credentials, here roll number of 
 the student is used and the username to uniquely identify the student and password can be 
 anything with minimum length 6 character.</p>
-1.2Apply Screen
+<h2>1.2Apply Screen</h2>
   It contains the already filled user details and shows the student before applying for bus pass. 
   It contains Upload Receipt feature though which student can upload receipt of fee paid for 
   availing bus facility directly from their phone. After verification student can click on apply 
